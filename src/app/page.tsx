@@ -163,7 +163,7 @@ export default function Home() {
       {/* 🔹 Banner Section */}
       <section
         className="relative w-full md:h-[95vh] h-[100vh] bg-cover bg-center"
-        style={{ backgroundImage: "url('/banner.png')" }}
+        style={{ backgroundImage: "url('/banner.PNG')" }}
       >
         <div className="relative z-20 h-full flex flex-col justify-center px-6 md:px-12 pt-32">
           <div className="text-center md:text-left md:ml-[120px]">
@@ -384,7 +384,7 @@ export default function Home() {
               </div>
               <h3 className="text-lg font-bold text-black mt-3">Buy a home</h3>
               <p className="text-sm text-gray-600 mt-2">
-                Find your place with an immersive photo experience and the most listings, including things you won&#39;t find anywhere else.
+                Find your place with an immersive photo experience and the most listings, including things you won't find anywhere else.
               </p>
               <button className="mt-4 px-6 py-2 bg-[#2b56b6] text-white text-sm font-semibold rounded-full flex items-center gap-2 hover:bg-blue-900 transition">
                 <Image src="/Button Icon.png" alt="Browse Icon" width={16} height={16} />
