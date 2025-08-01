@@ -17,6 +17,7 @@ export default function Page1() {
       style={{ fontFamily: "'Poppins', sans-serif" }}
     >
       {/* Google Fonts link directly in JSX */}
+      {/* Gradient Patch on Right Top */}
       <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet"

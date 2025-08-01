@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Image from "next/image";
 import Link from 'next/link';
 import Header2 from "@/components/Header2";
-
+{/* Gradient Patch on Right Top */}
 
 const furnishings = [
   { label: "Dining Table", icon: "/facilities/1.png" },

@@ -8,6 +8,7 @@ import {
   Building2, Home, LayoutGrid, Landmark, Tent,
   Trees, MapPinned, Layers3, Mountain
 } from "lucide-react";
+{/* Gradient Patch on Right Top */}
 
 export default function PropertyTypeSelection() {
 const options = [
