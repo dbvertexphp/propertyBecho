@@ -384,7 +384,7 @@ export default function Home() {
               </div>
               <h3 className="text-lg font-bold text-black mt-3">Buy a home</h3>
               <p className="text-sm text-gray-600 mt-2">
-                Find your place with an immersive photo experience and the most listings, including things you won't find anywhere else.
+                Find your place with an immersive photo experience and the most listings, including things you wot find anywhere else.
               </p>
               <button className="mt-4 px-6 py-2 bg-[#2b56b6] text-white text-sm font-semibold rounded-full flex items-center gap-2 hover:bg-blue-900 transition">
                 <Image src="/Button Icon.png" alt="Browse Icon" width={16} height={16} />
