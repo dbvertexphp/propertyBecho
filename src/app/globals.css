@@ -1,0 +1,83 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@layer base {
+body {
+    font-family: 'Nunito Sans', sans-serif;
+    @apply text-gray-900;
+  }
+}
+.angled-top-bg {
+  @apply absolute top-0 left-0 w-full h-full bg-blue-100;
+  clip-path: polygon(0% 15%, 100% 0%, 100% 100%, 0% 100%);
+}
+.angled-top-bg {
+  @apply absolute top-0 left-0 w-full h-full bg-blue-100;
+  clip-path: polygon(0% 0%, 100% 15%, 100% 100%, 0% 100%);
+}
+  .thumbnail-shape-even {
+    border-radius: 50% 50% 30% 30% / 50% 50% 30% 0%;
+  }
+
+  .thumbnail-shape-odd {
+    border-radius: 50% 30% 50% 30% / 0% 30% 50% 50%;
+  }
+  :root {
+  --background: #ffffff;
+  --foreground: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  @apply text-gray-900;
+}
+
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #ffffff;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  @apply text-gray-900;
+}
+.filter-red {
+  filter: brightness(0) saturate(100%) invert(15%) sepia(94%) saturate(7434%) hue-rotate(358deg) brightness(103%) contrast(111%);
+}
+
+@media (max-width: 768px) {
+  .mobile-footer-slant {
+    clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0% 100%);
+  }
+}
