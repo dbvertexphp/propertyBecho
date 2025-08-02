@@ -162,7 +162,7 @@ export default function Home() {
 
       {/* 🔹 Banner Section */}
       <section
-        className="relative w-full md:h-[95vh] h-[100vh] bg-cover bg-center"
+        className="relative w-full md:h-[97vh] h-[100vh] bg-cover bg-center"
         style={{ backgroundImage: "url('/banner.PNG')" }}
       >
         <div className="relative z-20 h-full flex flex-col justify-center px-6 md:px-12 pt-32">
@@ -203,7 +203,7 @@ export default function Home() {
             </button>
           </div>
         </div>
-        <div className="absolute bottom-0 w-full z-10 overflow-hidden mt-5">
+        <div className="absolute bottom-0 w-full z-10 overflow-hidden mt-5" style={{paddingTop:'26px'}}>
           <svg
             className="w-full h-[100px] hidden md:block"
             viewBox="0 0 1440 100"
@@ -216,13 +216,13 @@ export default function Home() {
               </filter>
             </defs>
             <path
-              d="M0,0 H600 C660,0 660,70 720,70 C780,70 780,0 840,0 H1440 V100 H0 Z"
+              d="M0,0 H600 C680,0 680,40 720,40 C760,40 760,0 840,0 H1440 V100 H0 Z"
               fill="#ffffff"
               filter="url(#waveShadow)"
             />
           </svg>
           <svg
-            className="w-full h-[100px] block md:hidden"
+            className="w-full h-[82px] block md:hidden"
             viewBox="0 0 1440 100"
             preserveAspectRatio="xMidYMid slice"
             xmlns="http://www.w3.org/2000/svg"
@@ -238,15 +238,16 @@ export default function Home() {
               filter="url(#waveShadowMobile)"
             />
           </svg>
-          <div className="absolute bottom-[60px] md:bottom-[35px] left-1/2 transform -translate-x-1/2 -mt-10">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#444444] rounded-full flex items-center justify-center shadow-lg border border-[#a5a4a4] mt-[-30px]">
+  
+          <div className="absolute bottom-[60px] md:bottom-[35px] left-1/2 transform -translate-x-1/2 mt-[-100px]">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#444444] rounded-full flex items-center justify-center shadow-lg border border-[#a5a4a4] md:mt-[-80px] z-15" >
               <span className="text-[#a5a4a4] text-lg sm:text-xl leading-none">↓</span>
             </div>
           </div>
         </div>
       </section>
 
-      <div className="relative w-full -mt-[90px] z-0 overflow-x-hidden">
+      <div className="relative w-full md:mt-[-100px] z-10 overflow-x-hidden -mt-20 ">
         <Image
           src="/bg.svg"
           alt="Decoration"
@@ -260,12 +261,15 @@ export default function Home() {
       <div className="relative z-10 px-6 md:px-12 mt-0 md:mt-[-750px] overflow-visible">
         <div className="relative z-10 px-0 md:px-0 mt-10 md:mt-0 flex flex-col md:flex-row justify-between items-start md:items-center">
           <div>
-            <h3 className="text-[31px] md:text-5xl ml-0 md:ml-[120px] text-left md:mt-1 mt-[-160px] tracking-tight">
+            <h3 className="text-[31px] md:text-5xl ml-0 md:ml-[120px] text-left md:mt-1 mt-[-100px] tracking-tight">
               <span className="text-black font-extrabold">Discover</span>{" "}
               <span className="text-[#2b56b6] font-extrabold">Recommended Places</span>
+              
             </h3>
+            
             <p className="mt-4 text-gray-600 text-sm md:text-base max-w-2xl text-left md:ml-[120px]">
               Duis vel interdum elit. Vivamus vel risus est. Integer a porta. Quisque nisi felis, tincidunt cursus efficitur at.
+              
             </p>
           </div>
           <div className="mt-4 md:mt-0 mr-6 md:mr-[120px]">
@@ -275,8 +279,9 @@ export default function Home() {
       </div>
 
       {/* 🔹 Recommended Places Carousel */}
-      <section className="px-4 md:px-12 md:mt-[40px] mt-[110px] flex justify-center">
-        <div className="relative max-w-7xl w-full mt-[10px] md:mt-[50px] overflow-hidden">
+      <section className="px-2 md:px-12 md:mt-[40px] mt-[110px] flex justify-center">
+        <div className="relative max-w-7xl w-full mt-[-50px] md:mt-[50px] overflow-hidden min-h-[480px] z-20">
+
           <div
             className={`flex ${isTransitioning ? "transition-transform duration-500 ease-in-out" : ""}`}
             style={{
@@ -289,15 +294,15 @@ export default function Home() {
                 className="min-w-full sm:min-w-[50%] lg:min-w-[25%] px-2"
               >
                 <Link href="/details">
-                  <div className="bg-white rounded-2xl shadow-md overflow-hidden transition hover:shadow-lg">
+                  <div className="bg-white rounded-2xl shadow-md overflow-hidden transition hover:shadow-lg ">
                     <Image
                       src={item.image}
                       alt="Property"
                       width={500}
                       height={150}
-                      className="object-contain h-full w-[110%] rounded-2xl"
+                      className="object-cover w-full h-56 md:h-56 rounded-t-2xl"
                     />
-                    <div className="px-4 pb-4">
+                    <div className="px-4 pb-4 pt-4">
                       <div className="flex justify-between items-center">
                         <p className="text-lg font-extrabold text-black">{item.price}</p>
                         <button
@@ -384,7 +389,7 @@ export default function Home() {
               </div>
               <h3 className="text-lg font-bold text-black mt-3">Buy a home</h3>
               <p className="text-sm text-gray-600 mt-2">
-                Find your place with an immersive photo experience and the most listings, including things you wot find anywhere else.
+                Find your place with an immersive photo experience and the most listings, including things you won't find anywhere else.
               </p>
               <button className="mt-4 px-6 py-2 bg-[#2b56b6] text-white text-sm font-semibold rounded-full flex items-center gap-2 hover:bg-blue-900 transition">
                 <Image src="/Button Icon.png" alt="Browse Icon" width={16} height={16} />
@@ -495,7 +500,7 @@ export default function Home() {
 
       {/* 🔹 Previous Places Carousel */}
       <section className="px-2 md:px-12 mt-10 flex justify-center">
-        <div className="relative max-w-7xl w-full mt-[10px] md:mt-[50px] overflow-hidden">
+        <div className="relative max-w-7xl w-full mt-[10px] md:mt-[50px] overflow-hidden min-h-[480px]">
           <div
             className={`flex ${isTransitioning ? "transition-transform duration-500 ease-in-out" : ""}`}
             style={{

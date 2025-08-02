@@ -78,4 +78,3 @@ export default function MovingDetail() {
     </div>
   );
 }
-{/* Gradient Patch on Right Top */}

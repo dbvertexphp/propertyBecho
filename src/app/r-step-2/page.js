@@ -21,7 +21,6 @@ export default function MovingDetail() {
       className="relative text-gray-900 bg-gray-50 min-h-screen overflow-hidden"
       style={{ fontFamily: "'Poppins', sans-serif" }}
     >
-    {/* Gradient Patch on Right Top */}
       {/* Google Fonts link directly in JSX */}
       <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"

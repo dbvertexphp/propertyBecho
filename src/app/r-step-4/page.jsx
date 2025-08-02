@@ -9,7 +9,7 @@ import {
   Building2, Home, LayoutGrid, Landmark, Tent,
   Trees, MapPinned, Layers3, Mountain
 } from "lucide-react";
-{/* Gradient Patch on Right Top */}
+
 export default function PropertyDetail() {
   const options = [
     { label: "Apartment", icon: <Building2 size={24} /> },
