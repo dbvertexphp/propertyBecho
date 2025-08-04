@@ -1,23 +1,55 @@
 "use client";
 
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import Image from "next/image";
 import Header2 from "@/components/Header2";
+import Step1 from "@/components/BrokerSteps/Broker1";
+import Step2 from "@/components/BrokerSteps/Broker2";
+import Step3 from "@/components/BrokerSteps/Broker3";
+import Step4 from "@/components/BrokerSteps/Broker4";
+
+interface FormData {
+  businessType: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  commodities: string[];
+  firmName?: string;
+  agreedToTerms: boolean;
+  areas?: string[];
+}
+
+interface FormErrors {
+  firstName: boolean;
+  lastName: boolean;
+  email: boolean;
+  phone: boolean;
+  commodities: boolean;
+  agreedToTerms: boolean;
+}
 
 export default function BrokerProfilePage() {
-  const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
+  const [currentStep, setCurrentStep] = useState(0);
+  const [formData, setFormData] = useState<FormData>({
+    businessType: "Individual",
+    firstName: "",
+    lastName: "",
     email: "",
-    firm: "",
+    phone: "",
+    commodities: [],
+    firmName: "",
+    agreedToTerms: false,
   });
-  const [errors, setErrors] = useState({
-    name: false,
-    phone: false,
+
+  const [formErrors, setFormErrors] = useState<FormErrors>({
+    firstName: false,
+    lastName: false,
     email: false,
+    phone: false,
+    commodities: false,
+    agreedToTerms: false,
   });
-  const [showRequiredMessage, setShowRequiredMessage] = useState(false);
 
   const steps = [
     "Personal Details",
@@ -26,321 +58,246 @@ export default function BrokerProfilePage() {
     "Select a Builder",
   ];
 
-  const handleInputChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    if (value.trim()) {
-      setErrors((prev) => ({ ...prev, [name]: false }));
+    if (name in formErrors) {
+      setFormErrors((prev) => ({ ...prev, [name]: false }));
     }
   };
 
-  const validateStep1 = () => {
-    const newErrors = {
-      name: !formData.name.trim(),
-      phone: !formData.phone.trim(),
-      email: !formData.email.trim(),
-    };
-    setErrors(newErrors);
-    const hasErrors = Object.values(newErrors).some((error) => error);
-    setShowRequiredMessage(hasErrors);
-    return !hasErrors;
-  };
-
-  const goNext = () => {
-    if (currentStep === 1 && !validateStep1()) {
-      return;
+  const handleCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: checked }));
+    if (name in formErrors) {
+      setFormErrors((prev) => ({ ...prev, [name]: false }));
     }
-    setCurrentStep((prev) => Math.min(prev + 1, steps.length));
   };
 
-  const goBack = () => setCurrentStep((prev) => Math.max(prev - 1, 1));
+  const handleNext = () => {
+    if (currentStep === 0) {
+      const errors = {
+        firstName: formData.firstName.trim() === "",
+        lastName: formData.lastName.trim() === "",
+        email: formData.email.trim() === "",
+        phone: formData.phone.trim() === "",
+        agreedToTerms: !formData.agreedToTerms,
+        commodities: false,
+      };
+      setFormErrors(errors);
+      if (Object.values(errors).some((val) => val)) return;
+    } else if (currentStep === 1) {
+      const errors = {
+        ...formErrors,
+        commodities: formData.commodities.length === 0,
+      };
+      setFormErrors(errors);
+      if (errors.commodities) return;
+    }
+
+    if (currentStep < steps.length - 1) {
+      setCurrentStep(currentStep + 1);
+    } else {
+      window.location.href = "/next-page";
+    }
+  };
+
+  const handleBack = () => {
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+
+  const renderStep = () => {
+    switch (currentStep) {
+      case 0:
+        return (
+          <Step1
+            formData={formData}
+            formErrors={formErrors}
+            handleChange={handleChange}
+            handleCheckbox={handleCheckbox}
+            handleNext={handleNext}
+          />
+        );
+      case 1:
+        return (
+          <Step2
+            formData={formData}
+            setFormData={setFormData}
+            formErrors={formErrors}
+            setFormErrors={setFormErrors}
+            handleNext={handleNext}
+            handleBack={handleBack}
+          />
+        );
+      case 2:
+        return (
+          <Step3
+            formData={formData}
+            setFormData={setFormData}
+            handleNext={handleNext}
+            handleBack={handleBack}
+          />
+        );
+      case 3:
+        return (
+          <Step4
+            formData={formData}
+            setFormData={setFormData}
+            handleNext={handleNext}
+            handleBack={handleBack}
+          />
+        );
+      default:
+        return <div className="text-center py-10">Step Coming Soon</div>;
+    }
+  };
 
   return (
-    <div className="max-w-7xl mx-auto">
-      <div className="min-h-screen bg-white flex flex-col font-sans">
-        {/* 🔷 Header */}
-        <div className="p-4 top-0 w-full z-20 bg-white">
-          <Header2 />
-        </div>
+    <div
+      className="relative bg-gray-50 min-h-screen text-gray-900"
+      style={{ fontFamily: "'Poppins', sans-serif" }}
+    >
+      <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+      />
+      <Header2 />
 
-        {/* 🔙 Back Button */}
-        <div className="mt-[150px] md:mt-[150px] ml-4 lg:ml-10">
-          <div className="w-10 h-10 p-2 border border-gray-300 rounded-xl shadow-sm hover:shadow-md transition cursor-pointer">
-            <Image
-              src="/Line arrow-left.png"
-              alt="Back"
-              width={24}
-              height={24}
-            />
-          </div>
-        </div>
+      <img
+        src="/bubble.png"
+        alt="Bubble 2"
+        className="absolute top-0 right-0 w-[120px] md:w-[190px] z-0 opacity-80"
+      />
+      <img
+        src="/bubble1.png"
+        alt="Bubble 1"
+        className="absolute top-0 right-0 w-[90px] md:w-[134px] z-10"
+      />
 
-        {/* Mobile Heading */}
-        <div className="block lg:hidden px-4 pb-2 mt-10">
-          <h2 className="text-2xl font-extrabold text-black">Broker Profile</h2>
-          <p className="text-sm text-gray-400 mt-1">
-            Specializing in connecting buyers, sellers, and investors with the
-            right opportunities.
-          </p>
-        </div>
+      {/* Mobile Stepper */}
+      <div className="block lg:hidden pt-[130px] px-4">
+        <h2 className="text-2xl font-extrabold mt-10">Broker Profile</h2>
+        <p className="text-sm text-gray-500 mb-6">
+          Specializing in connecting buyers, sellers, and investors with the
+          right opportunities.
+        </p>
 
-        {/* 🔄 Layout */}
-        <div className="flex flex-1 flex-col lg:flex-row p-4 lg:p-10 gap-8 lg:h-[calc(100vh-200px)] lg:items-stretch lg:overflow-hidden">
-          <div className="hidden lg:flex flex-col w-1/3 relative mt-6">
-            {/* Continuous Vertical Gray Line */}
-            <div
-              className="absolute left-[30px] top-[64px] w-[3px] bg-gray-300 z-0"
-              style={{ height: `${(steps.length - 1) * 124}px` }}
-            />
-            {steps.map((step, index) => (
+        <div className="relative grid grid-cols-4 gap-[40px] mb-6">
+          <div className="absolute top-[4px] left-[6px] right-[6px] h-1 bg-gray-300 z-0" />
+          {steps.map((step, index) => {
+            const isCompleted = index <= currentStep;
+            return (
               <div
-                className="flex items-start gap-6 mb-20 relative z-10"
                 key={index}
+                className="relative z-10 flex flex-col items-start"
               >
-                {/* Blue Rectangle Background */}
-                {(currentStep === index + 1 || currentStep > index + 1) && (
-                  <div className="absolute -left-4 -top-2 w-[400px] h-[72px] bg-[#2D5BE3]/20 rounded-xl z-5" />
-                )}
-                {/* Step Icon */}
-                <div className="flex flex-col items-center relative">
-                  {/* White circle to mask the vertical line inside the icon */}
-                  <div className="absolute top-0 left-0 w-16 h-16 rounded-full bg-white z-10" />
-
-                  {/* Circle with Step Icon */}
-                  <div
-                    className={`w-16 h-16 rounded-full border-3 overflow-hidden flex items-center justify-center z-20
-                    ${
-                      currentStep === index + 1
-                        ? "border-[#2D5BE3]"
-                        : currentStep > index + 1
-                        ? "border-[#2D5BE3]"
-                        : "border-gray-300"
-                    }`}
-                  >
-                    <img
-                      src={`/step-icons/step${index + 1}${
-                        currentStep === index + 1 || currentStep > index + 1
-                          ? "blue"
-                          : "gray"
-                      }.svg`}
-                      alt={`step${index + 1}`}
-                      className="w-20 h-20 object-contain"
-                    />
-                  </div>
-                </div>
-
-                {/* Step Name (left aligned) */}
-                <div className="pt-4 text-left">
-                  <span
-                    className={`text-xl font-bold ${
-                      currentStep === index + 1
-                        ? "text-[#2D5BE3]"
-                        : currentStep > index + 1
-                        ? "text-[#2D5BE3]"
-                        : "text-gray-500"
-                    }`}
-                  >
-                    {step}
-                  </span>
-                </div>
+                <div
+                  className={`rounded-full mb-1 border-4 ${
+                    isCompleted
+                      ? "w-4 h-4 border-[#2D5BE3] bg-white"
+                      : "w-3 h-3 border-gray-300 bg-gray-300"
+                  }`}
+                />
+                <span
+                  className={`text-[11px] font-semibold ${
+                    isCompleted ? "text-[#2D5BE3]" : "text-gray-400"
+                  }`}
+                >
+                  {step}
+                </span>
               </div>
-            ))}
-          </div>
+            );
+          })}
+        </div>
 
-          {/* 🔁 Stepper Top (Mobile) */}
-          <div className="lg:hidden w-full px-2 mb-6 relative mt-[20px]">
-            {/* Connecting Line */}
-            <div className="absolute top-[5px] left-[6px] right-[6px] h-1 bg-gray-300 z-0" />
+        {renderStep()}
+      </div>
 
-            {/* Step Grid */}
-            <div className="relative grid grid-cols-4 gap-[40px] justify-start items-start pl-0">
-              {steps.map((step, index) => {
-                const isCompleted = currentStep > index;
-
+      {/* Desktop View */}
+      <main className="hidden lg:block pt-[140px] px-4">
+        <div className="max-w-[1264px] mx-auto grid grid-cols-[449px_1fr]">
+          {/* Sidebar Stepper */}
+          <div className="relative p-6">
+            <ul className="relative ml-6 mt-6 space-y-8">
+              <div className="absolute left-[33px] top-0 w-[2px] h-full bg-gray-300 z-0" />
+              {steps.map((step, i) => {
+                const isActiveOrCompleted = i <= currentStep;
                 return (
-                  <div
-                    key={index}
-                    className="relative z-10 flex flex-col items-start"
+                  <li
+                    key={i}
+                    className={`flex items-center p-4 rounded-[19px] gap-4 relative z-10 ${
+                      isActiveOrCompleted
+                        ? "bg-[#2450a0] text-white"
+                        : "group transition hover:bg-[#2450a0] hover:text-white cursor-pointer"
+                    }`}
+                    style={{ width: "250px" }}
                   >
-                    {/* Step Dot */}
                     <div
-                      className={`rounded-full mb-1 border-4 transition-all duration-300 ${
-                        isCompleted
-                          ? "w-4 h-4 border-[#2D5BE3] bg-white"
-                          : "w-3 h-3 border-gray-300 bg-gray-300"
-                      }`}
-                    />
-
-                    {/* Step Label */}
-                    <span
-                      className={`text-[11px] leading-tight break-words text-left max-w-[90px] font-bold ${
-                        isCompleted ? "text-[#2D5BE3]" : "text-[#0A0909]"
-                      }`}
+                      className={`w-10 h-10 rounded-full ${
+                        isActiveOrCompleted
+                          ? "bg-[#f4f5f8]"
+                          : "bg-white border border-gray-300 group-hover:border-[#2450a0]"
+                      } flex items-center justify-center`}
+                      style={{
+                        width: i === 2 ? "63px" : i === 3 ? "41px" : "46px",
+                      }}
                     >
-                      {step === "Select Area and Specialization" ? (
-                        <>
-                          Select Area
-                          <br />
-                          and Specialization
-                        </>
-                      ) : (
-                        step
-                      )}
-                    </span>
-                  </div>
+                      <Image
+                        src={`/step-icons/step${i + 1}${
+                          isActiveOrCompleted ? "blue" : "gray"
+                        }.svg`}
+                        alt={`Step ${i + 1}`}
+                        width={24}
+                        height={24}
+                        style={{width:"100px"}}
+                      />
+                    </div>
+                    <p
+                      className={`font-bold ${
+                        isActiveOrCompleted
+                          ? "text-white"
+                          : "text-[#2a2a2a] group-hover:text-white"
+                      }`}
+                      style={{ fontSize: "18px" }}
+                    >
+                      {step}
+                    </p>
+                  </li>
                 );
               })}
+            </ul>
+            <div className="mt-20">
+              <p className="text-3xl font-extrabold text-black">Welcome,</p>
+              <p className="text-3xl font-extrabold text-[#2450a0]">
+                Signup{" "}
+                <span className="text-black font-medium">to Continue!</span>
+              </p>
+              <p className="text-sm mt-1 text-gray-500">
+                Already Have Account{" "}
+                <a href="#" className="text-[#2450a0] underline">
+                  Login here
+                </a>
+              </p>
             </div>
           </div>
 
-          {/* 📝 Form Content */}
-          {currentStep === 1 && (
-            <div className="lg:w-2/3 lg:mx-auto lg:rounded-2xl lg:shadow-lg lg:p-12 lg:bg-white space-y-5 h-full overflow-y-auto">
-              {showRequiredMessage && (
-                <p className="text-red-500 text-sm">
-                  * indicates required field
-                </p>
-              )}
-              <div>
-                <label className="block text-[#0A0909] font-bold mb-1 md:text-xl">
-                  Enter your name {errors.name && (
-                    <span className="text-red-500">*</span>
-                  )}
-                </label>
-                <input
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className={`border ${errors.name ? 'border-red-500' : 'border-gray-400'} p-2 w-full placeholder-gray-400 text-black rounded-2xl`}
-                  placeholder="Ex. Ramesh"
-                />
-              </div>
+          {/* Step Content */}
+          <div className="bg-white rounded-[35px] shadow-md p-10 mt-[30px] max-w-[800px] w-full">
+            <p className="text-sm font-medium text-gray-500">
+              Step {currentStep + 1} / {steps.length}
+            </p>
+            <h2 className="text-3xl font-bold mb-2">Broker Profile</h2>
+            <p className="text-sm text-gray-500 mb-6">
+              Specializing in connecting buyers, sellers, and investors with the
+              right opportunities.
+            </p>
 
-              <div>
-                <label className="block text-[#0A0909] font-bold mb-1 md:text-xl">
-                  Enter your phone number {errors.phone && (
-                    <span className="text-red-500">*</span>
-                  )}
-                </label>
-                <input
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  className={`border ${errors.phone ? 'border-red-500' : 'border-gray-400'} p-2 w-full placeholder-gray-400 text-black rounded-2xl`}
-                  placeholder="Ex. 9876543210"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[#0A0909] font-bold mt-1 md:text-xl">
-                  Enter your email {errors.email && (
-                    <span className="text-red-500">*</span>
-                  )}
-                </label>
-                <input
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className={`border ${errors.email ? 'border-red-500' : 'border-gray-400'} p-2 w-full placeholder-gray-400 text-black rounded-2xl`}
-                  placeholder="ramesh@gmail.com"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[#0A0909] font-bold mb-1 md:text-xl">
-                  Enter your firm{" "}
-                  <span className="text-gray-500 text-sm">(optional)</span>
-                </label>
-                <input
-                  name="firm"
-                  value={formData.firm}
-                  onChange={handleInputChange}
-                  className="border border-gray-400 p-2 w-full placeholder-gray-400 text-black rounded-2xl"
-                  placeholder="Ex. Ramesh Builders"
-                />
-              </div>
-
-              <div className="flex justify-center w-full">
-                <button
-                  onClick={goNext}
-                  className="bg-[#2450A0] text-white px-6 py-2 rounded-full w-full md:w-[40%]"
-                >
-                  Save and Next
-                </button>
-              </div>
-            </div>
-          )}
-
-          {currentStep === 2 && (
-            <div className="lg:w-2/3 lg:mx-auto lg:border lg:rounded-2xl lg:shadow-lg lg:p-8 lg:bg-white space-y-5">
-              <h2 className="text-lg font-bold mb-4">Step 2: Specialty</h2>
-              <input
-                className="border border-gray-400 p-2 w-full placeholder-gray-400 text-black rounded-2xl"
-                placeholder="Specialty"
-              />
-              <div className="flex justify-between">
-                <button
-                  onClick={goBack}
-                  className="bg-gray-200 px-4 py-2 rounded"
-                >
-                  Back
-                </button>
-                <button
-                  onClick={goNext}
-                  className="bg-[#2D5BE3] text-white px-4 py-2 rounded"
-                >
-                  Next
-                </button>
-              </div>
-            </div>
-          )}
-
-          {currentStep === 3 && (
-            <div className="lg:w-2/3 lg:mx-auto lg:border lg:rounded-2xl lg:shadow-lg lg:p-8 lg:bg-white space-y-5">
-              <h2 className="text-lg font-bold mb-4">Step 3: Area Selection</h2>
-              <input
-                className="border border-gray-400 p-2 w-full placeholder-gray-400 text-black rounded-2xl"
-                placeholder="Area"
-              />
-              <div className="flex justify-between">
-                <button
-                  onClick={goBack}
-                  className="bg-gray-200 px-4 py-2 rounded"
-                >
-                  Back
-                </button>
-                <button
-                  onClick={goNext}
-                  className="bg-[#2D5BE3] text-white px-4 py-2 rounded"
-                >
-                  Next
-                </button>
-              </div>
-            </div>
-          )}
-
-          {currentStep === 4 && (
-            <div className="lg:w-2/3 lg:mx-auto lg:border lg:rounded-2xl lg:shadow-lg lg:p-8 lg:bg-white space-y-5">
-              <h2 className="text-lg font-bold mb-4">Step 4: Associations</h2>
-              <input
-                className="border border-gray-400 p-2 w-full placeholder-gray-400 text-black rounded-2xl"
-                placeholder="Association"
-              />
-              <div className="flex justify-between">
-                <button
-                  onClick={goBack}
-                  className="bg-gray-200 px-4 py-2 rounded"
-                >
-                  Back
-                </button>
-                <button className="bg-[#2D5BE3] text-white px-4 py-2 rounded">
-                  Finish
-                </button>
-              </div>
-            </div>
-          )}
+            {renderStep()}
+          </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }
