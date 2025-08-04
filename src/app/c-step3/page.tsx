@@ -24,15 +24,15 @@ export default function PropertyTypeSelection() {
   const [error, setError] = useState("");
   const [selected, setSelected] = useState(0);
 
-  const handleNextClick = (e: { preventDefault: () => void; }) => {
-    if (selectedOption === "Other" && otherText.trim() === "") {
-      e.preventDefault();
-      setError("Please enter the property type.");
-      return;
-    }
-    setError("");
-    // Save selectedOption and otherText if needed
-  };
+  const handleNextClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+  if (selectedOption === "Other" && otherText.trim() === "") {
+    e.preventDefault();
+    setError("Please enter the property type.");
+    return;
+  }
+ 
+  // If validation passes, you can optionally navigate programmatically if needed.
+};
 
   return (
     <div
