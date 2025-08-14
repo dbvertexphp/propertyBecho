@@ -9,24 +9,19 @@ export default function Details() {
     <div>
       <Header2 />
 
-      {/* 🖼️ Image with Tag inside bordered container */}
-      <div className="flex justify-center mt-[150px]">
-        {/* 🔲 Container with white border */}
-        <div className="relative w-[87%] h-[70vh] rounded-2xl bg-white p-2 shadow-md">
-          {/* 📸 Image inside container */}
-          <div className="w-full h-full rounded-2xl overflow-hidden relative">
-            <Image
-              src="/details/banner.png"
-              alt="Rounded Display"
-              fill
-              className="object-cover"
-            />
+      {/* 🖼️ Centered Image before Footer */}
+      <div className="md:w-[99%] md:h-[95vh] w-[95%] h-[55vh] relative mx-auto md:mt-1 mt-[150px] rounded-xl overflow-hidden">
+        {/* ✅ Image */}
+        <Image
+          src="/details/banner.png"
+          alt="Banner Before Footer"
+          fill
+          className="object-cover"
+        />
 
-            {/* 🟩 Tag — inside border container */}
-            <div className="absolute top-0 left-0 translate-x-[-1px] translate-y-[-1px] bg-[#2bad4a] text-white text-xl font-bold px-6 py-2 shadow-md rounded-tr-full rounded-br-full z-10">
-              For sale by owner
-            </div>
-          </div>
+        {/* ✅ Tag: For sale by owner */}
+        <div className="absolute top-5 left-0 bg-[#2BAD4A] text-white md:mt-[130px] font-semibold md:px-6 md:py-2 py-1 px-4 rounded-tr-full rounded-br-full shadow-lg z-10">
+          For sale by owner
         </div>
       </div>
 

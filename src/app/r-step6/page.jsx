@@ -64,7 +64,7 @@ export default function MovingDetail() {
 
       {/* Bottom Left Background Shape */}
       <img
-        src="r_step_6_icon.png"
+        src="bubble 4.png"
         alt="Bottom Wave"
         className="absolute bottom-0 z-0"
         style={{ width: "181px" }}

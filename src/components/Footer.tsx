@@ -4,7 +4,7 @@ import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <footer className="relative bg-[#C4D9FF] text-gray-700 pt-60 pb-8 mt-1 overflow-hidden font-[Poppins]">
+    <footer className="relative bg-[#C4D9FF] text-gray-700 pt-60 pb-8 mt-1 overflow-hidden">
       {/* Top Curve */}
       <div className="absolute top-0 left-0 w-full z-10">
         <svg viewBox="0 0 1440 200" className="w-full h-[200px] hidden sm:block" preserveAspectRatio="none">
@@ -25,8 +25,8 @@ const Footer = () => {
             <Link href="/">
               <Image src="/site logo.png" alt="PropertyBecho Logo" width={500} height={60} />
             </Link>
-            <p className="mt-4 text-[16px] text-[#666666] max-w-4xl">
-              Molestiae quaerat iste quia qui doloribus. Doloremque est at. Accusantium incidunt rerum soluta. Rerum <br />
+            <p className="mt-4 text-[16px] text-[#666666] max-w-6xl">
+              Molestiae quaerat iste quia qui doloribus. Doloremque est at. Accusantium incidunt rerum soluta. Rerum
               fugiat ullam tenetur. Magnam eaque repudiandae aut fugit voluptas sint dolor soluta.
             </p>
             <div className="flex space-x-4 mt-6 justify-center md:justify-start">
@@ -48,19 +48,19 @@ const Footer = () => {
     
     {/* Useful Links */}
     <div>
-      <h3 className="font-extrabold text-[15px] text-[#121828]">Useful Links</h3>
-      <ul className="mt-4 justify-center md:justify-start gap-4 text-[14px] text-[#555555]">
-        <li><a href="#">Home</a></li>
+      <h3 className="font-extrabold text-[15px] text-[#000000]">Useful Links</h3>
+      <ul className="mt-4 justify-center md:justify-start gap-4 text-[14px] text-[#666666]">
+        <li><a href="/">Home</a></li>
         <li><a href="#">Buy</a></li>
-        <li><a href="#">Sell</a></li>
+        <li><a href="/broker">Sell</a></li>
         <li><a href="#">Customer Support</a></li>
       </ul>
     </div>
 
     {/* Other */}
     <div>
-      <h3 className="font-extrabold text-[15px] text-[#121828]">Other</h3>
-      <ul className="mt-4 justify-center md:justify-start gap-4 text-[14px] text-[#555555]">
+      <h3 className="font-extrabold text-[15px] text-[#000000]">Other</h3>
+      <ul className="mt-4 justify-center md:justify-start gap-4 text-[14px] text-[#666666]">
         <li><a href="#">Privacy Policy</a></li>
         <li><a href="#">Terms of Service</a></li>
       </ul>

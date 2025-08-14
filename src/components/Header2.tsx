@@ -10,8 +10,8 @@ const Header2 = () => {
 
   return (
     <div className="w-full z-50 py-4 absolute top-0 left-0">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="p-2 outline outline-[2px] outline-[#ffffff] rounded-3xl shadow-md bg-[#e9e9e9]">
+      <div className="max-w-lg mx-auto px-4 sm:max-w-[90%]">
+        <div className="p-2 outline-[2px] outline-[#ffffff] rounded-3xl shadow-md bg-[#e9e9e9]">
           <div className="p-[1px] bg-white rounded-3xl shadow-md">
             <nav className="bg-white rounded-3xl px-6 py-3 flex items-center justify-between relative">
               {/* Left Side Pills */}
@@ -51,12 +51,12 @@ const Header2 = () => {
                   <Image
                     src="/24-support.png"
                     alt="Support Icon"
-                    width={15}   // decreased from 20 to 16
+                    width={15}
                     height={16}
                   />
                 </button>
                 <a
-                  href="#"
+                  href="/basic_login"
                   className="flex items-center justify-center px-5 py-2 rounded-full text-white font-semibold text-sm bg-[#2450A0] border border-[#C4D9FF]"
                 >
                   SIGN IN
@@ -87,7 +87,7 @@ const Header2 = () => {
 
             {/* Mobile Dropdown Menu */}
             {isMobileMenuOpen && (
-              <div className="lg:hidden mt-2 bg-white rounded-xl shadow-xl p-4 border border-gray-200">
+              <div className="lg:hidden mt-2 bg-white rounded-xl shadow-xl p-4 border border-gray-200 max-w-lg mx-auto sm:max-w-[90%]">
                 <ul className="flex flex-col space-y-4">
                   {["Buy", "Sell", "Rent", "Collaboration"].map((item) => (
                     <li key={item}>
@@ -118,7 +118,7 @@ const Header2 = () => {
                   </li>
                   <li>
                     <a
-                      href="#"
+                      href="/basic_login"
                       className="flex items-center justify-center bg-[#2450A0] text-white font-bold text-sm px-5 py-2 rounded-full hover:bg-blue-700 transition"
                     >
                       SIGN IN

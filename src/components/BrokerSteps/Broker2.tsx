@@ -37,25 +37,25 @@ interface Step2Props {
 }
 
 const furnishings: FacilityItem[] = [
-  { label: "Apartment", icon: "/Broker/Apartment.png" },
-  { label: "Independent House", icon: "/Broker/house.png" },
-  { label: "Duplex", icon: "/Broker/duplex.png" },
-  { label: "Independent Floor", icon: "/Broker/independent_house.png" },
-  { label: "Villa", icon: "/Broker/Raid.png" },
-  { label: "Studio", icon: "/Broker/studio.png" },
-  { label: "Penthouse", icon: "/Broker/Yurt.png" },
-  { label: "Plot", icon: "/Broker/Parking.png" },
-  { label: "Farm House", icon: "/Broker/Farm.png" },
-  { label: "Agricultural Land", icon: "/Broker/agriculture.png" },
+  { label: "Apartment", icon: "/Broker/Apartment.svg" },
+  { label: "Independent House", icon: "/Broker/House (1).svg" },
+  { label: "Duplex", icon: "/Broker/Casa particular.svg" },
+  { label: "Independent Floor", icon: "/Broker/Tiny home.svg" },
+  { label: "Villa", icon: "/Broker/Raid.svg" },
+  { label: "Studio", icon: "/Broker/Frame.svg" },
+  { label: "Penthouse", icon: "/Broker/Yurt.svg" },
+  { label: "Plot", icon: "/Broker/Parking (1).svg" },
+  { label: "Farm House", icon: "/Broker/Farm.svg" },
+  { label: "Agricultural Land", icon: "/Broker/Parking (2).svg" },
 ];
 
 const societyAmenities: FacilityItem[] = [
-  { label: "Office", icon: "/Broker/office.png" },
-  { label: "Retail Shop", icon: "/Broker/Group.png" },
-  { label: "Showroom", icon: "/Broker/showroom.png" },
-  { label: "Warehouse", icon: "/Broker/warehouse.png" },
-  { label: "Plot", icon: "/Broker/Tiny.png" },
-  { label: "Others", icon: "/Broker/Yurt.png" },
+  { label: "Office", icon: "/Broker/Apartment.svg" },
+  { label: "Retail Shop", icon: "/Broker/Parking (1).svg" },
+  { label: "Showroom", icon: "/Broker/Casa particular.svg" },
+  { label: "Warehouse", icon: "/Broker/Raid.svg" },
+  { label: "Plot", icon: "/Broker/Tiny home.svg" },
+  { label: "Others", icon: "/Broker/Yurt.svg" },
 ];
 
 export default function Step2({
@@ -84,56 +84,53 @@ export default function Step2({
   };
 
   return (
-    <form className="space-y-5">
-      <div className="bg-[#E8EDF7] text-[#0052CC] text-sm font-medium p-4 rounded-md flex items-start space-x-2 mb-6">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5 mt-[2px] flex-shrink-0 text-[#2450A0]"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
+    <div className="space-y-5 ">
+      {/* Info Banner */}
+      <div className="flex items-start gap-2 bg-[#e7eef9] p-2 rounded-md w-full md:w-[600px] ">
+        <img
+          src="/broker/icon.png"
+          alt="Info Icon"
+          className="w-4 h-4 mt-[1px] flex-shrink-0"
+        />
+        <p
+          style={{ fontSize: "13px", fontWeight: "500" }}
+          className="text-[#2450A0]"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"
-          />
-        </svg>
-        <p style={{ fontSize: "12px", fontWeight: "500" }}>
           All things chosen next are for leads that will be provided so choose
           carefully.
         </p>
       </div>
 
-      {/* 🔹 Residential Section */}
-      <div>
+      {/* Residential Section */}
+      <div className="w-full md:w-[840px]">
         <h3 className="font-semibold mb-4 text-[15px]">
           Residential<span className="text-red-500">*</span>
         </h3>
-        <div className="grid grid-cols-3 gap-2 sm:gap-4 lg:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
           {furnishings.map((item) => (
             <button
               key={item.label}
               type="button"
               onClick={() => toggleFacility(item.label)}
-              className={`flex flex-col items-center justify-center rounded-lg p-2 sm:p-3 md:p-4 transition-all h-[90px] sm:h-[100px] ${
-                formData.commodities.includes(item.label)
-                  ? "border border-[#0052CC] bg-[#EBF1FF] text-[#0052CC]"
-                  : "border border-[#1218280D] bg-[#f3f3f3] text-[#121212]"
-              }`}
+              className={`relative z-10 pointer-events-auto flex flex-row md:flex-col items-center gap-2 md:gap-0 rounded-lg p-2 sm:p-3 md:p-4 transition-all 
+                h-[50px] sm:h-[50px] md:h-[110px] w-full
+                ${
+                  formData.commodities.includes(item.label)
+                    ? "border border-[#0052CC] bg-[#EBF1FF] text-[#0052CC]"
+                    : "border border-[#1218280D] bg-[#f3f3f3] text-[#131313]"
+                }`}
             >
               <img
                 src={item.icon}
                 alt={item.label}
-                className="w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] md:w-[50px] md:h-[50px]"
+                className="w-[28px] h-[28px] sm:w-[32px] sm:h-[32px] md:w-[40px] md:h-[40px]"
               />
               <span
-                className={`mt-2 sm:mt-3 font-medium ${
+                className={`font-medium text-left md:text-center ${
                   formData.commodities.includes(item.label)
                     ? "text-[#0052CC]"
-                    : "text-[rgba(113,117,128,1)]"
-                } text-[10px] sm:text-[12px] md:text-[15px]`}
+                    : "text-[#313131]"
+                } text-[13px] sm:text-[13px] md:text-[15px]`}
               >
                 {item.label}
               </span>
@@ -142,38 +139,36 @@ export default function Step2({
         </div>
       </div>
 
-      {/* 🔹 Commercial Section */}
-      <div>
+      {/* Commercial Section */}
+      <div className="w-full md:w-[840px] mt-6">
         <h3 className="font-semibold mb-4 text-[15px]">
           Commercial<span className="text-red-500">*</span>
         </h3>
-        <div className="grid grid-cols-3 gap-2 sm:gap-4 lg:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
           {societyAmenities.map((item) => (
             <button
               key={item.label}
               type="button"
               onClick={() => toggleFacility(item.label)}
-              className={`flex flex-col items-center justify-center rounded-lg p-2 sm:p-3 md:p-4 transition-all h-[90px] sm:h-[100px] ${
-                formData.commodities.includes(item.label)
-                  ? "border border-[#0052CC] bg-[#EBF1FF] text-[#0052CC]"
-                  : "border border-[#1218280D] bg-[#f3f3f3] text-[#121212]"
-              }`}
+              className={`relative z-10 pointer-events-auto flex flex-row md:flex-col items-center gap-2 md:gap-0 rounded-lg p-2 sm:p-3 md:p-4 transition-all 
+                h-[50px] sm:h-[50px] md:h-[110px] w-full
+                ${
+                  formData.commodities.includes(item.label)
+                    ? "border border-[#0052CC] bg-[#EBF1FF] text-[#0052CC]"
+                    : "border border-[#1218280D] bg-[#f3f3f3] text-[#121212]"
+                }`}
             >
               <img
-  src={item.icon}
-  alt={item.label}
-  className={`${
-    item.label === "Retail Shop"
-      ? "w-[35px] h-[35px]"
-      : "w-[30px] h-[30px] sm:w-[35px] sm:h-[35px] md:w-[50px] md:h-[50px]"
-  }`}
-/>
+                src={item.icon}
+                alt={item.label}
+                className="w-[28px] h-[28px] sm:w-[32px] sm:h-[32px] md:w-[40px] md:h-[40px]"
+              />
               <span
-                className={`mt-2 sm:mt-3 font-medium ${
+                className={`font-medium text-left md:text-center ${
                   formData.commodities.includes(item.label)
                     ? "text-[#0052CC]"
-                    : "text-[rgba(113,117,128,1)]"
-                } text-[10px] sm:text-[12px] md:text-[15px]`}
+                    : "text-[#313131]"
+                } text-[13px] sm:text-[13px] md:text-[15px]`}
               >
                 {item.label}
               </span>
@@ -182,30 +177,33 @@ export default function Step2({
         </div>
       </div>
 
-      {/* 🔺 Validation Message */}
+      {/* Validation Message */}
       {formErrors.commodities && (
         <p className="text-red-500 text-sm mt-1">
           At least one commodity is required
         </p>
       )}
 
-      {/* 🔻 Navigation Buttons */}
-      <div className="flex justify-between">
+      {/* Navigation Buttons */}
+      <div
+        className="flex justify-between w-[343px] md:w-[850px]"
+        style={{ marginTop: "18px" }}
+      >
         <button
           type="button"
           onClick={handleBack}
-          className="bg-gray-300 text-gray-900 px-6 py-2 rounded-full w-[48%]"
+          className="hidden md:block bg-gray-300 text-gray-900 px-6 py-2 rounded-full w-[48%]"
         >
           Back
         </button>
         <button
           type="button"
           onClick={handleNext}
-          className="bg-[#2450A0] text-white px-6 py-2 rounded-full w-[48%]"
+          className="bg-[#2450A0] text-white px-6 py-2 rounded-full md:w-[48%] w-full md:mb-0 mb-8"
         >
           Save and Next
         </button>
       </div>
-    </form>
+    </div>
   );
 }

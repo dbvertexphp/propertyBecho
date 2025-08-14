@@ -171,7 +171,7 @@ export default function Home() {
 
       {/* 🔹 Banner Section */}
       <section
-        className="relative w-full md:h-[97vh] h-[100vh] bg-cover bg-center"
+        className="relative w-full md:h-[97vh] h-[90vh] bg-cover bg-center"
         style={{ backgroundImage: "url('/banner.PNG')" }}
       >
         <div className="relative z-20 h-full flex flex-col justify-center px-6 md:px-12 pt-32">
@@ -276,8 +276,7 @@ export default function Home() {
           </svg>
 
           <div className="absolute bottom-[60px] md:bottom-[35px] left-1/2 transform -translate-x-1/2 mt-[-100px]">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#444444] rounded-full flex items-center justify-center shadow-lg border border-[#a5a4a4] md:mt-[-80px] z-15">
-              <span className="text-[#a5a4a4] text-lg sm:text-xl leading-none">
+<div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shadow-lg border border-[#c2c0c0] md:mt-[-80px] z-15 bg-gradient-to-r from-[#5b83da] to-[#413f3f]">              <span className="text-[#ffffff] text-lg sm:text-xl leading-none">
                 ↓
               </span>
             </div>
@@ -460,7 +459,7 @@ export default function Home() {
           <h1 className="text-3xl md:text-5xl font-extrabold text-[#2b56b6] text-center md:mt-0 mt-[-70px]">
             We are here <span className="text-black">For you</span>
           </h1>
-          <p className="mt-4 text-[#9c9c9c] text-sm md:text-base max-w-xl text-center">
+          <p className="mt-4 text-[#242323] text-sm md:text-base max-w-xl text-center">
             Duis vel interdum elit. Vivamus vel risus est. Integer a porta.
             Quisque nisi felis, tincidunt cursus efficitur at.
           </p>
