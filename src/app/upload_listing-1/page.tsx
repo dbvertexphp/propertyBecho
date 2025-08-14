@@ -43,7 +43,7 @@ export default function Uploadlisting() {
         <div className="w-full px-4 md:w-[87%] mx-auto">
           {/* Icon + Title */}
           <div
-            className="w-[50px] h-[50px] flex items-center justify-center border border-[#E6E6E6] rounded-[12px] bg-white"
+            className="md:hidden w-[50px] h-[50px] flex items-center justify-center border border-[#E6E6E6] rounded-[12px] bg-white"
             style={{ border: "solid #0000001C", borderRadius: "16px" }}
           >
             <img
@@ -144,70 +144,80 @@ export default function Uploadlisting() {
             </div>
 
             {/* Buttons */}
-            <div className="flex flex-col mt-6 gap-3">
-              <label htmlFor="uploadImages">
-                <div
-                  className="w-full py-3 text-center cursor-pointer"
-                  style={{
-                    borderRadius: "52px",
-                    border: "solid #2450A0 1px",
-                  }}
-                >
-                  <span
-                    style={{
-                      color: "#2450A0",
-                      fontSize: "14px",
-                      fontWeight: "600",
-                    }}
-                  >
-                    UPLOAD MORE IMAGES
-                  </span>
-                  <input
-                    type="file"
-                    id="uploadImages"
-                    multiple
-                    accept="image/*"
-                    style={{ display: "none" }}
-                    onChange={(e) => {
-                      const files = e.target.files;
-                      console.log("Selected files:", files);
-                    }}
-                  />
-                </div>
-              </label>
+<div className="mt-6 flex flex-col gap-3">
 
-              <button
-                className="w-full py-3"
-                style={{
-                  borderRadius: "52px",
-                  border: "solid #12182833 1px",
-                  backgroundColor: "#1218280D",
-                  marginTop: "25px",
-                }}
-              >
-                <span style={{ fontSize: "14px", fontWeight: "500" }}>
-                  SKIP AND LISTING
-                </span>
-              </button>
-              <button
-                className="w-full py-3"
-                style={{
-                  borderRadius: "52px",
-                  border: "solid #2450A0 1px",
-                  backgroundColor: "#2450A0",
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: "14px",
-                    fontWeight: "500",
-                    color: "#FFFFFF",
-                  }}
-                >
-                  VERIFY YOUR LISTING
-                </span>
-              </button>
-            </div>
+  {/* First row: Upload + Skip */}
+  <div className="flex flex-col sm:flex-row justify-center gap-4">
+    <label htmlFor="uploadImages" className="w-full sm:w-[30%]">
+      <div
+        className="w-full py-3 text-center cursor-pointer"
+        style={{
+          borderRadius: "52px",
+          border: "solid #2450A0 1px",
+        }}
+      >
+        <span
+          style={{
+            color: "#2450A0",
+            fontSize: "14px",
+            fontWeight: "600",
+          }}
+        >
+          UPLOAD MORE IMAGES
+        </span>
+        <input
+          type="file"
+          id="uploadImages"
+          multiple
+          accept="image/*"
+          style={{ display: "none" }}
+          onChange={(e) => {
+            const files = e.target.files;
+            console.log("Selected files:", files);
+          }}
+        />
+      </div>
+    </label>
+
+    <button
+      className="w-full sm:w-[30%] py-3"
+      style={{
+        borderRadius: "52px",
+        border: "solid #12182833 1px",
+        backgroundColor: "#1218280D",
+      }}
+    >
+      <span style={{ fontSize: "14px", fontWeight: "500" }}>
+        SKIP AND LISTING
+      </span>
+    </button>
+  </div>
+
+  {/* Second row: Verify button */}
+  <div className="flex justify-center">
+    <button
+      className="w-full sm:w-[30%] py-3"
+      style={{
+        borderRadius: "52px",
+        border: "solid #2450A0 1px",
+        backgroundColor: "#2450A0",
+      }}
+    >
+      <span
+        style={{
+          fontSize: "14px",
+          fontWeight: "500",
+          color: "#FFFFFF",
+        }}
+      >
+        VERIFY YOUR LISTING
+      </span>
+    </button>
+  </div>
+</div>
+
+
+
           </div>
         </div>
       </main>

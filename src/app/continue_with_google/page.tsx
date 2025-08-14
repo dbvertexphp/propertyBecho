@@ -42,7 +42,7 @@ export default function Page1() {
         <div className="w-full px-4">
           {/* Call Icon */}
           <div className="mx-auto mt-10 flex justify-start w-full lg:w-[87%]">
-            <div className="w-16 h-16 rounded-2xl border-2 border-gray-300 flex items-center justify-center">
+            <div className=" md:hidden w-16 h-16 rounded-2xl border-2 border-gray-300 flex items-center justify-center">
               <img
                 src="/facilities/call.png"
                 alt="Call"
@@ -52,7 +52,7 @@ export default function Page1() {
           </div>
 
           {/* Desktop Card */}
-          <div className="hidden lg:flex justify-center mt-6">
+          <div className="hidden lg:flex justify-center mt-10">
             <div className="bg-white rounded-2xl shadow-lg p-10 w-[650px] flex flex-col items-center">
               <h2 className="text-3xl font-bold mt-3">Login</h2>
               <p className="text-gray-600 mt-2 text-center">
@@ -60,7 +60,7 @@ export default function Page1() {
               </p>
 
               {/* Form Fields */}
-              <form className="mt-6 w-full space-y-4">
+              <form className="mt-6 w-[70%] space-y-4">
                 <div>
                   <input
                     type="text"

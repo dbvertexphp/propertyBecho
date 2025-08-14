@@ -282,17 +282,19 @@ export default function PropertyWithMap() {
                 height={150}
                 className="w-full h-[500px] object-cover rounded-lg mt-8"
               />
-              <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 block md:hidden">
-                <button onClick={() => setShowMobileMap(false)}>
-                  <Image
-                    src="/listview.png"
-                    alt="List View"
-                    width={150}
-                    height={150}
-                    className="w-32"
-                  />
-                </button>
-              </div>
+              {!showFilterModal && (
+                <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 block md:hidden">
+                  <button onClick={() => setShowMobileMap(false)}>
+                    <Image
+                      src="/listview.png"
+                      alt="List View"
+                      width={150}
+                      height={150}
+                      className="w-32"
+                    />
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         ) : (
@@ -476,7 +478,7 @@ export default function PropertyWithMap() {
             </div>
 
             {/* 🔹 Desktop Layout: Map + Cards */}
-            <div className="hidden md:flex mt-8 mx-auto max-w-screen-xl px-4">
+            <div className="hidden md:flex mt-8 mx-auto max-w-[87%] px-4">
               <div className="md:w-1/2 h-[calc(100vh-120px)] sticky top-[120px]">
                 <Image
                   src="/maplocation.png"
@@ -571,7 +573,7 @@ export default function PropertyWithMap() {
             <div className="md:hidden px-4 mb-20 hide-scrollbar">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center bg-white border border-gray-300 rounded-2xl px-3 py-2 shadow-sm w-[calc(100%-60px)]">
+                  <div className="flex items-center bg-white border border-gray-300 rounded-2xl px-5 py-2 shadow-sm w-[calc(100%-60px)]">
                     <Image
                       src="/locationblue.png"
                       alt="Location"

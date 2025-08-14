@@ -1,19 +1,17 @@
 "use client";
 import { useState } from "react";
-import { IoCloseCircle } from "react-icons/io5";
-import { FaHome, FaSwimmingPool, FaParking, FaDumbbell } from "react-icons/fa";
-import { MdApartment, MdVerified, MdOutlineDomain } from "react-icons/md";
-import { GiModernCity } from "react-icons/gi";
-
+import Image from "next/image";
 interface FilterModalProps {
   isOpen: boolean;
   onClose: () => void;
   filters: {
+    otherFilters: string[];
     forSale: string;
     bhk: string;
     sqft: [number, number];
     bath: string;
     construction: string;
+    advancedFilters: string[];
   };
   handleFilterChange: (filterType: string, value: any) => void;
   clearFilter: (filterType: string) => void;
@@ -26,21 +24,11 @@ export default function FilterModal({
   handleFilterChange,
   clearFilter,
 }: FilterModalProps) {
-  const [localFilters, setLocalFilters] = useState(filters);
-
-  const toggleBhk = (type: string) => {
-    setLocalFilters((prev) => {
-      const bhkArray = prev.bhk.includes(type)
-        ? prev.bhk
-            .split(",")
-            .filter((t) => t !== type)
-            .join(",")
-        : prev.bhk
-        ? `${prev.bhk},${type}`
-        : type;
-      return { ...prev, bhk: bhkArray };
-    });
-  };
+  const [localFilters, setLocalFilters] = useState({
+    ...filters,
+    otherFilters: filters.otherFilters || [],
+    advancedFilters: filters.advancedFilters || [],
+  });
 
   const handleApply = () => {
     handleFilterChange("forSale", localFilters.forSale);
@@ -48,6 +36,8 @@ export default function FilterModal({
     handleFilterChange("sqft", localFilters.sqft);
     handleFilterChange("bath", localFilters.bath);
     handleFilterChange("construction", localFilters.construction);
+    handleFilterChange("otherFilters", localFilters.otherFilters);
+    handleFilterChange("advancedFilters", localFilters.advancedFilters);
     onClose();
   };
 
@@ -57,46 +47,64 @@ export default function FilterModal({
     clearFilter("sqft");
     clearFilter("bath");
     clearFilter("construction");
+    clearFilter("otherFilters");
+    clearFilter("advancedFilters");
     setLocalFilters({
       forSale: "",
       bhk: "",
       sqft: [100, 5000],
       bath: "",
       construction: "",
+      otherFilters: [],
+      advancedFilters: [],
     });
   };
 
   const getActiveFilters = () => {
-    const active: { label: string; icon: string; type: string }[] = [];
+    const active: { label: string;type: string }[] = [];
 
     if (localFilters.sqft[0] !== 100 || localFilters.sqft[1] !== 5000) {
       active.push({
-        label: `${localFilters.sqft[0]} sqft - ${localFilters.sqft[1]} sqft`,
-        icon: "/icons/size.png",
+        label: `₹${localFilters.sqft[0].toLocaleString()} - ₹${localFilters.sqft[1].toLocaleString()}`,
+       
         type: "sqft",
       });
     }
     if (localFilters.bhk) {
       active.push({
         label: localFilters.bhk,
-        icon: "/icons/bed.png",
+      
         type: "bhk",
       });
     }
     if (localFilters.forSale) {
       active.push({
         label: localFilters.forSale,
-        icon: "/icons/home.png",
+
         type: "forSale",
       });
     }
     if (localFilters.construction) {
       active.push({
         label: localFilters.construction,
-        icon: "/icons/status.png",
+
         type: "construction",
       });
     }
+    localFilters.otherFilters.forEach((filter) => {
+      active.push({
+        label: filter,
+    
+        type: "otherFilters",
+      });
+    });
+    localFilters.advancedFilters.forEach((filter) => {
+      active.push({
+        label: filter,
+      
+        type: "advancedFilters",
+      });
+    });
 
     return active;
   };
@@ -112,28 +120,33 @@ export default function FilterModal({
           <div className="flex justify-between items-center">
             <h2 className="text-2xl font-bold">Filter</h2>
             <button
-              onClick={onClose}
-              className="w-9 h-9 flex items-center justify-center rounded-xl border border-gray-300 hover:border-gray-500"
-            >
-              <img
-                src="/facilities/call.png"
-                alt="Close"
-                className="w-7 h-7 object-contain"
-              />
-            </button>
+  onClick={onClose}
+  className="w-9 h-9 flex items-center justify-center rounded-xl border border-gray-300 hover:border-gray-500 bg-white"
+>
+  <Image
+    src="/facilities/call.png" // Change this path to your image
+    alt="Close"
+    width={20}
+    height={20}
+    className="object-contain"
+  />
+</button>
           </div>
 
           {/* Active Filters Row with Fixed Image + Horizontal Scroll for Chips */}
           {getActiveFilters().length > 0 && (
             <div className="flex items-center gap-2 mr-1">
-              {/* Fixed Image */}
-              <div className="flex-shrink-0">
-                <img
-                  src="/Frame 2.svg"
-                  alt="Filters"
-                  className="w-[70px] h-10 "
-                />
-              </div>
+
+
+<div className="flex-shrink-0">
+  <Image
+    src="/Frame 2.svg" // path to your image
+    alt="Filter"
+    width={70}
+    height={40}
+    className="object-contain"
+  />
+</div>
 
               {/* Scrollable Chips */}
               <div className="flex-1 overflow-x-auto">
@@ -161,15 +174,11 @@ export default function FilterModal({
           <div className="flex items-center gap-2">
             <span className="text-sm text-gray-700">Search in</span>
             <div className="flex items-center bg-gray-100 rounded-full px-3 py-1 border border-gray-200">
-              <img
-                src="/Location.png"
-                alt="Location"
-                className="w-4 h-4 mr-1"
-              />
+         
               <input
                 type="text"
                 placeholder="Enter location"
-                className="bg-transparent border-none outline-none text-sm w-32 h-3 ml-1 "
+                className="bg-transparent border-none outline-none text-sm w-32 h-6 ml-1"
               />
             </div>
           </div>
@@ -186,7 +195,7 @@ export default function FilterModal({
                   key={opt}
                   className={`flex-1 py-3 rounded-xl border text-sm font-medium ${
                     localFilters.forSale === opt
-                      ? "bg-[#7497e2] text-gray-800 border-[#2b56b6]"
+                      ? "bg-[#eaf0ff] text-gray-800 border-[#2b56b6]"
                       : "bg-gray-200 text-gray-800 border-gray-300"
                   }`}
                   onClick={() => setLocalFilters({ ...localFilters, forSale: opt })}
@@ -226,7 +235,7 @@ export default function FilterModal({
                   className="absolute top-2 h-1 bg-[#2b56b6] rounded"
                   style={{
                     left: `${(localFilters.sqft[0] / 100000) * 100}%`,
-                    right: `${100 - (localFilters.sqft[1] / 100000) * 100}%`
+                    right: `${100 - (localFilters.sqft[1] / 100000) * 100}%`,
                   }}
                 ></div>
 
@@ -272,120 +281,201 @@ export default function FilterModal({
           </div>
 
           {/* BHK Type */}
-<div>
-  <p className="text-lg font-bold mt-[50px]">BHK Type</p>
-  <div className="flex flex-wrap gap-2 mt-2">
-    {["1 RK", "1 BHK", "2 BHK", "3 BHK", "4 BHK", "5 BHK", "5+ BHK"].map((type) => {
-      const isSelected = localFilters.bhk === type;
-      return (
-        <label
-          key={type}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl border text-sm cursor-pointer transition-all
-            ${isSelected
-              ? "bg-[#eaf0ff] border-[#2b56b6] text-[#2b56b6]"
-              : "bg-white border-gray-300 text-gray-700"
-            }`}
-        >
-          <input
-            type="radio"
-            name="bhk"
-            value={type}
-            checked={isSelected}
-            onChange={() => setLocalFilters((prev) => ({ ...prev, bhk: type }))}
-            className="hidden rounded-md"
-          />
-          {/* Outer Border Box */}
-          <span
-            className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center
-              ${isSelected
-                ? "border-[#2b56b6]"
-                : "border-gray-300"
-              }`}
-          >
-            {/* Inner Square */}
-            <span
-              className={`w-3 h-3 rounded-md
-                ${isSelected
-                  ? "bg-[#2b56b6]"
-                  : "bg-gray-200"
-                }`}
-            ></span>
-          </span>
-          {type}
-        </label>
-      );
-    })}
-  </div>
-</div>
-
-
-
+          <div>
+            <p className="text-lg font-bold mt-[50px]">BHK Type</p>
+            <div className="flex flex-wrap gap-2 mt-2">
+              {["1 RK", "1 BHK", "2 BHK", "3 BHK", "4 BHK", "5 BHK", "5+ BHK"].map((type) => {
+                const isSelected = localFilters.bhk === type;
+                return (
+                  <label
+                    key={type}
+                    className={`flex items-center gap-2 px-4 py-2 rounded-xl border text-sm cursor-pointer transition-all
+                      ${isSelected
+                        ? "bg-[#eaf0ff] border-[#2b56b6] text-[#2b56b6]"
+                        : "bg-white border-gray-300 text-gray-700"
+                      }`}
+                  >
+                    <input
+                      type="radio"
+                      name="bhk"
+                      value={type}
+                      checked={isSelected}
+                      onChange={() => setLocalFilters((prev) => ({ ...prev, bhk: type }))}
+                      className="hidden rounded-md"
+                    />
+                    {/* Outer Border Box */}
+                    <span
+                      className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center
+                        ${isSelected
+                          ? "border-[#2b56b6]"
+                          : "border-gray-300"
+                        }`}
+                    >
+                      {/* Inner Square */}
+                      <span
+                        className={`w-3 h-3 rounded-md
+                          ${isSelected
+                            ? "bg-[#2b56b6]"
+                            : "bg-gray-200"
+                          }`}
+                      ></span>
+                    </span>
+                    {type}
+                  </label>
+                );
+              })}
+            </div>
+          </div>
 
           {/* Construction Status */}
           <div>
-            <p className="text-sm font-medium mb-2">Construction Status</p>
+            <p className="text-lg font-bold mb-2">Construction Status</p>
             <div className="flex gap-2">
-              {["Ready to move", "Under Construction"].map((status) => (
-                <button
-                  key={status}
-                  onClick={() =>
-                    setLocalFilters({ ...localFilters, construction: status })
-                  }
-                  className={`px-4 py-2 rounded-full border text-sm ${
-                    localFilters.construction === status
-                      ? "bg-[#2b56b6] text-white border-[#2b56b6]"
-                      : "bg-white text-gray-700 border-gray-300"
-                  }`}
-                >
-                  {status}
-                </button>
-              ))}
+              {["Ready to move", "Under Construction"].map((status) => {
+                const isSelected = localFilters.construction === status;
+                return (
+                  <label
+                    key={status}
+                    className={`flex items-center gap-2 px-4 py-1 rounded-xl border text-sm cursor-pointer transition-all
+                      ${isSelected
+                        ? "bg-[#eaf0ff] border-[#2b56b6] text-[#2b56b6]"
+                        : "bg-white border-gray-300 text-gray-700"
+                      }`}
+                  >
+                    <input
+                      type="radio"
+                      name="construction"
+                      value={status}
+                      checked={isSelected}
+                      onChange={() => setLocalFilters((prev) => ({ ...prev, construction: status }))}
+                      className="hidden"
+                    />
+                    {/* Outer border box */}
+                    <span
+                      className={`w-6 h-6 rounded-md border-2 flex items-center justify-center
+                        ${isSelected
+                          ? "border-[#2b56b6]"
+                          : "border-gray-300"
+                        }`}
+                    >
+                      {/* Inner square */}
+                      <span
+                        className={`w-3 h-3 rounded-md
+                          ${isSelected
+                            ? "bg-[#2b56b6]"
+                            : "bg-gray-200"
+                          }`}
+                      ></span>
+                    </span>
+                    {status}
+                  </label>
+                );
+              })}
             </div>
           </div>
 
           {/* Other Filters */}
           <div>
-            <p className="text-sm font-medium mb-2">Other Filters</p>
+            <p className="text-lg font-bold mb-2">Other Filters</p>
             <div className="space-y-2">
               {[
-                { label: "View Verified properties only", icon: <MdVerified /> },
-                {
-                  label: "View properties with images only",
-                  icon: <MdOutlineDomain />,
-                },
-                { label: "View RERA Compliant only", icon: <GiModernCity /> },
-              ].map((f) => (
-                <button
-                  key={f.label}
-                  className="w-full border rounded-lg px-3 py-2 flex items-center gap-2 text-sm text-gray-700"
-                >
-                  {f.icon} {f.label}
-                </button>
-              ))}
+                { label: "View Verified properties only" },
+                { label: "View properties with images only" },
+                { label: "View RERA Compliant only" },
+              ].map((f) => {
+                const isSelected = localFilters.otherFilters?.includes(f.label);
+                return (
+                  <label
+                    key={f.label}
+                    className={`w-full border rounded-lg px-3 py-2 flex items-center gap-2 text-base cursor-pointer transition-all
+                      ${isSelected
+                        ? "bg-[#eaf0ff] border-[#2b56b6] text-[#2b56b6]"
+                        : "bg-white border-gray-300 text-gray-700"
+                      }`}
+                  >
+                    <input
+                      type="checkbox"
+                      value={f.label}
+                      checked={isSelected}
+                      onChange={() => {
+                        setLocalFilters((prev) => {
+                          const current = prev.otherFilters || [];
+                          const updated = isSelected
+                            ? current.filter((item) => item !== f.label)
+                            : [...current, f.label];
+                          return { ...prev, otherFilters: updated };
+                        });
+                      }}
+                      className="hidden"
+                    />
+                    {/* Outer border box */}
+                    <span
+                      className={`w-6 h-6 rounded-md border-2 flex items-center justify-center
+                        ${isSelected
+                          ? "border-[#2b56b6]"
+                          : "border-gray-300"
+                        }`}
+                    >
+                      {/* Inner square */}
+                      <span
+                        className={`w-3 h-3 rounded-md
+                          ${isSelected
+                            ? "bg-[#2b56b6]"
+                            : "bg-gray-200"
+                          }`}
+                      ></span>
+                    </span>
+                    {f.label}
+                  </label>
+                );
+              })}
             </div>
           </div>
 
           {/* Advanced Filters */}
-          <div>
-            <p className="text-sm font-medium mb-2">Advanced Filters</p>
-            <div className="grid grid-cols-3 gap-3">
-              {[
-                { label: "Gated Community", icon: <FaHome /> },
-                { label: "Lift", icon: <MdApartment /> },
-                { label: "Swimming Pool", icon: <FaSwimmingPool /> },
-                { label: "Gym", icon: <FaDumbbell /> },
-                { label: "Parking", icon: <FaParking /> },
-              ].map((item) => (
-                <button
-                  key={item.label}
-                  className="flex flex-col items-center p-3 border rounded-xl text-sm text-gray-700"
-                >
-                  <span className="text-lg">{item.icon}</span>
-                  {item.label}
-                </button>
-              ))}
-            </div>
+<div>
+  <p className="text-lg font-bold mb-2">Advanced Filters</p>
+  <div className="grid grid-cols-3 gap-3">
+    {[
+      { label: "Gated Community", image: "/filters/Container.svg" },
+      { label: "Lift", image: "/filters/Cycladic home.svg" },
+      { label: "Swimming Pool", image: "/filters/Pool.svg" },
+      { label: "Gym", image: "/filters/Gym.svg" },
+      { label: "Parking", image: "/filters/Parking (3).svg" },
+    ].map((item) => {
+      const isSelected = localFilters.advancedFilters?.includes(item.label);
+      return (
+        <button
+          key={item.label}
+          onClick={() => {
+            setLocalFilters((prev) => {
+              const current = prev.advancedFilters || [];
+              return isSelected
+                ? { ...prev, advancedFilters: current.filter((i) => i !== item.label) }
+                : { ...prev, advancedFilters: [...current, item.label] };
+            });
+          }}
+          className={`flex flex-col items-center justify-between p-3 rounded-xl text-base h-[120px] transition-all border 
+            ${isSelected
+              ? "bg-[#eaf0ff] border-[#2b56b6] text-[#2b56b6]"
+              : "bg-white border-gray-300 text-gray-700"
+            }`}
+        >
+          <div className="w-12 h-12 flex items-center justify-center mt-2">
+            <Image
+              src={item.image}
+              alt={item.label}
+              width={48}
+              height={48}
+              className="object-contain"
+            />
           </div>
+          <span className="mt-1 text-center">{item.label}</span>
+        </button>
+      );
+    })}
+  </div>
+</div>
         </div>
 
         {/* Footer */}

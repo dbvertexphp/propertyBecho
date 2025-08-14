@@ -3,6 +3,7 @@
 import { useState, ChangeEvent, useRef, useEffect } from "react";
 import Header2 from "@/components/Header2";
 import Image from "next/image";
+
 const documents = [
   "Registered Sale Deed / Conveyance Deed",
   "Allotment Letter (Builder / Authority)",
@@ -22,45 +23,13 @@ const documents = [
   "RWA or Builder Possession Letter",
   "No Objection Certificate (NOC)",
 ];
+
 export default function UploadListing() {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState("");
   const wrapperRef = useRef<HTMLDivElement | null>(null);
-
-  // Close dropdown if clicked outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        wrapperRef.current &&
-        !wrapperRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-  const [selectedDocument, setSelectedDocument] = useState<string>("");
-  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
-  const selectRef = useRef<HTMLSelectElement>(null);
-
-  // To detect focus loss outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        selectRef.current &&
-        !selectRef.current.contains(event.target as Node)
-      ) {
-        setIsDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  const [selected, setSelected] = useState("");
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
-  const [showAll, setShowAll] = useState<boolean>(false);
   const [showImg1, setShowImg1] = useState(false);
 
   const displayedImages = [
@@ -68,24 +37,31 @@ export default function UploadListing() {
     "/upload_listing/img5.png",
     "/upload_listing/img6.png",
   ];
-  const TOTAL_IMAGES = 12;
-  const dummyImages = Array.from(
-    { length: TOTAL_IMAGES },
-    () => "/upload_listing/img1.png"
-  );
 
+  // Close dropdown if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Handle document upload safely
   const handleDocumentUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setUploadedFiles(Array.from(e.target.files));
-      console.log("Uploaded document:", e.target.files[0]);
+    const files = e.target.files;
+    if (files) {
+      setUploadedFiles(Array.from(files));
     }
   };
 
+  // Handle image upload safely
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const filesArray = Array.from(e.target.files);
-      setSelectedImages((prev) => [...prev, ...filesArray]);
-      console.log("Uploaded images:", filesArray);
+    const files = e.target.files;
+    if (files) {
+      setSelectedImages((prev) => [...prev, ...Array.from(files)]);
     }
   };
 
@@ -112,40 +88,26 @@ export default function UploadListing() {
 
       <Header2 />
 
-      <main
-        className="pt-[120px] pb-12 flex justify-center relative z-10"
-        style={{ top: "35px" }}
-      >
-        <div className="w-full px-4" style={{ maxWidth: "1000px" }}>
+      <main className="pt-[120px] pb-12 flex justify-center relative z-10" style={{ top: "35px" }}>
+        <div className="w-full px-4 mx-auto" style={{ maxWidth: "87%" }}>
           {/* Header Icon */}
-          <div className="w-[50px] h-[50px] flex items-center justify-center bg-white border border-[#E6E6E6] rounded-[16px]">
-            <img
-              src="/facilities/call.png"
-              alt="Call Icon"
-              className="w-[29px] h-[29px]"
-            />
+          <div className="md:hidden w-[50px] h-[50px] flex items-center justify-center bg-white border border-[#E6E6E6] rounded-[16px]">
+            <img src="/facilities/call.png" alt="Call Icon" className="w-[29px] h-[29px]" />
           </div>
 
-          <h2
-            className="text-2xl font-bold text-black mt-8"
-            style={{ fontWeight: "800" }}
-          >
+          <h2 className="text-2xl font-bold text-black mt-8" style={{ fontWeight: "800" }}>
             Verify Listing
           </h2>
           <p className="text-sm text-gray-500 mt-3">
-            Fill out the form with your requirements and we’ll connect you with
-            properties that match your needs fast, easy, and reliable.
+            Fill out the form with your requirements and we’ll connect you with properties that match
+            your needs fast, easy, and reliable.
           </p>
 
           {/* DigiLocker Button */}
           <div className="flex flex-col items-center justify-center p-4">
             <button
-              className="flex items-center justify-between px-6 py-4 rounded-lg text-white font-semibold"
-              style={{
-                backgroundColor: "#2450A0",
-                width: "500px",
-                maxWidth: "100%",
-              }}
+              className="flex items-center justify-between px-6 py-4 rounded-lg text-white font-semibold w-full max-w-[500px]"
+              style={{ backgroundColor: "#2450A0" }}
             >
               <div className="flex items-center gap-2">
                 <img
@@ -153,13 +115,7 @@ export default function UploadListing() {
                   alt="digilocker"
                   style={{ width: "20px", height: "20px" }}
                 />
-                <span
-                  style={{
-                    fontSize: "18px",
-                    fontWeight: "500",
-                    color: "#FFFFFF",
-                  }}
-                >
+                <span style={{ fontSize: "18px", fontWeight: "500", color: "#FFFFFF" }}>
                   Verify with DigiLocker
                 </span>
               </div>
@@ -176,41 +132,23 @@ export default function UploadListing() {
           </div>
 
           {/* Document Dropdown */}
-          {/* Document Dropdown */}
-          <div
-            className="mb-4"
-            ref={wrapperRef}
-            style={{ borderRadius: "16px" }}
-          >
+          <div className="mb-4" ref={wrapperRef}>
             <label className="text-sm font-semibold block mb-2 text-black">
-              <span
-                style={{
-                  fontSize: "16px",
-                  fontWeight: "700",
-                  color: "#0A0909",
-                }}
-              >
+              <span style={{ fontSize: "16px", fontWeight: "700", color: "#0A0909" }}>
                 Select Your Document
               </span>{" "}
               <span className="text-red-500">*</span>
             </label>
 
-            {/* Select box */}
             <div
               onClick={() => setIsOpen(!isOpen)}
               className="relative border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-600 cursor-pointer bg-white"
-              style={{ borderRadius: "16px" }}
             >
               {selected || "Select document"}
 
-              {/* Icon */}
               <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
                 <Image
-                  src={
-                    isOpen
-                      ? "/upload_listing/button1.png"
-                      : "/upload_listing/arrow_down.png"
-                  }
+                  src={isOpen ? "/upload_listing/button1.png" : "/upload_listing/arrow_down.png"}
                   alt="Dropdown Icon"
                   width={25}
                   height={20}
@@ -218,34 +156,8 @@ export default function UploadListing() {
               </div>
             </div>
 
-            {/* Dropdown list */}
             {isOpen && (
-              <ul
-                className="absolute z-10 mt-2 max-h-60 w-[345px] md:w-[968px] overflow-y-scroll bg-white border border-gray-300 rounded-lg shadow-md text-sm"
-                style={{
-                  WebkitOverflowScrolling: "touch",
-                  overflowY: "scroll",
-                  scrollbarWidth: "thin", // for Firefox
-                  scrollbarColor: "#2450A0 #0A090926", // for Firefox
-                }}
-              >
-                <style jsx>{`
-                  ul::-webkit-scrollbar {
-                    width: 8px;
-                    height: 3px;
-                  }
-
-                  ul::-webkit-scrollbar-track {
-                    background: #0a090926;
-                    border-radius: 8px;
-                  }
-
-                  ul::-webkit-scrollbar-thumb {
-                    background-color: #2450a0;
-                    border-radius: 8px;
-                  }
-                `}</style>
-
+              <ul className="absolute z-10 mt-2 max-h-60 w-full overflow-y-scroll bg-white border border-gray-300 rounded-lg shadow-md text-sm">
                 {documents.map((doc, index) => (
                   <li
                     key={index}
@@ -253,28 +165,10 @@ export default function UploadListing() {
                       setSelected(doc);
                       setIsOpen(false);
                     }}
-                    className="px-4 py-2 cursor-pointer"
-                    style={{ transition: "all 0.2s ease" }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = "#E7ECF5";
-                      const span = e.currentTarget.querySelector("span");
-                      if (span) span.style.color = "#2450A0";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = "transparent";
-                      const span = e.currentTarget.querySelector("span");
-                      if (span) span.style.color = "#6e7381";
-                    }}
+                    className="px-4 py-2 cursor-pointer hover:bg-[#E7ECF5] hover:text-[#2450A0]"
+                    style={{ fontSize: "15px", fontWeight: 700, color: "#6e7381" }}
                   >
-                    <span
-                      style={{
-                        fontSize: "15px",
-                        fontWeight: "700",
-                        color: "#6e7381",
-                      }}
-                    >
-                      {doc}
-                    </span>
+                    {doc}
                   </li>
                 ))}
               </ul>
@@ -284,25 +178,14 @@ export default function UploadListing() {
           {/* Upload Document */}
           <div className="mb-6 w-full">
             <label className="text-sm font-semibold text-black block mb-2">
-              <span
-                style={{
-                  fontSize: "16px",
-                  fontWeight: "700",
-                  color: "#0A0909",
-                }}
-              >
+              <span style={{ fontSize: "16px", fontWeight: "700", color: "#0A0909" }}>
                 Upload the Document
               </span>{" "}
               <span className="text-red-500">*</span>
             </label>
 
-            <div
-              className="flex items-center border border-gray-300 rounded-full overflow-hidden px-4 py-2 bg-white w-full"
-              style={{ borderRadius: "16px" }}
-            >
-              <span className="text-sm text-gray-400 flex-1">
-                Upload the document
-              </span>
+            <div className="flex items-center border border-gray-300 rounded-full overflow-hidden px-4 py-2 bg-white w-full">
+              <span className="text-sm text-gray-400 flex-1">Upload the document</span>
 
               <label
                 htmlFor="staticUpload"
@@ -323,23 +206,15 @@ export default function UploadListing() {
           </div>
 
           {/* Upload Images Section */}
-          {/* Upload Images Section */}
           <div>
             <label className="text-sm font-semibold text-black block mb-2">
-              <span
-                style={{
-                  fontSize: "16px",
-                  fontWeight: "700",
-                  color: "#0A0909",
-                }}
-              >
+              <span style={{ fontSize: "16px", fontWeight: "700", color: "#0A0909" }}>
                 Upload Images
               </span>{" "}
               <span className="text-red-500">*</span>
             </label>
 
-            {/* Show only 3 fixed images */}
-            <div className="grid grid-cols-3 gap-2 sm:gap-3 relative">
+            <div className="grid grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3 relative">
               {displayedImages.map((img, index) => (
                 <div key={index} className="relative">
                   <img
@@ -363,9 +238,8 @@ export default function UploadListing() {
               ))}
             </div>
 
-            {/* Show img1.png when +9 more is clicked */}
             {showImg1 && (
-              <div className="grid grid-cols-3 gap-2 sm:gap-3 mt-4">
+              <div className="grid grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3 mt-4">
                 {Array.from({ length: 9 }).map((_, idx) => (
                   <img
                     key={idx}
@@ -377,9 +251,8 @@ export default function UploadListing() {
               </div>
             )}
 
-            {/* Uploaded user images (if any) */}
             {selectedImages.length > 0 && (
-              <div className="grid grid-cols-3 gap-2 sm:gap-3 mt-4">
+              <div className="grid grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3 mt-4">
                 {selectedImages.map((file, index) => (
                   <img
                     key={index}
@@ -391,40 +264,21 @@ export default function UploadListing() {
               </div>
             )}
 
-            {/* Upload More Button */}
-            <div className="mt-4">
-              <label htmlFor="uploadImages">
+            <div className="mt-4 flex justify-center">
+              <label htmlFor="uploadImages" className="w-full sm:w-[30%]">
                 <div
                   className="w-full py-3 text-center cursor-pointer"
-                  style={{
-                    borderRadius: "52px",
-                    border: "solid #2450A0 1px",
-                  }}
+                  style={{ borderRadius: "52px", border: "solid #2450A0 1px" }}
                 >
-                  <span
-                    style={{
-                      color: "#2450A0",
-                      fontSize: "14px",
-                      fontWeight: "600",
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontSize: "16px",
-                        fontWeight: "800",
-                        color: "##2450A0",
-                      }}
-                    >
-                      {" "}
-                      UPLOAD MORE IMAGES{" "}
-                    </span>
+                  <span className="text-[#2450A0] font-semibold text-sm sm:text-base">
+                    UPLOAD MORE IMAGES
                   </span>
                   <input
                     type="file"
                     id="uploadImages"
                     multiple
                     accept="image/*"
-                    style={{ display: "none" }}
+                    className="hidden"
                     onChange={handleImageUpload}
                   />
                 </div>
@@ -433,52 +287,21 @@ export default function UploadListing() {
           </div>
 
           {/* Info Box */}
-          <div
-            className="bg-[#E7ECF5] text-[#2450A0] text-sm rounded-xl px-4 py-3 flex items-start space-x-2 mb-4"
-            style={{ marginTop: "60px" }}
-          >
+          <div className="bg-[#E7ECF5] text-[#2450A0] text-sm rounded-xl px-4 py-3 flex items-start space-x-2 mb-4 mt-16 w-full sm:w-[50%] mx-auto">
             <img src="/upload_listing/info.png" alt="" />
             <p>
-              <span
-                style={{
-                  fontSize: "12px",
-                  fontWeight: "600",
-                  color: "#2450A0",
-                }}
-              >
-                Once verified, your listing will get a green
-              </span>
-              <span
-                style={{
-                  fontSize: "12px",
-                  fontWeight: "600",
-                  color: "#2450A0",
-                }}
-              >
-                ‘Verified’
-              </span>{" "}
-              tag.
+              <span style={{ fontSize: "12px", fontWeight: "600" }}>Once verified, your listing will get a green</span>{" "}
+              <span style={{ fontSize: "12px", fontWeight: "600" }}>‘Verified’</span> tag.
             </p>
           </div>
 
           {/* Submit Button */}
-          <div className="mt-6">
+          <div className="mt-6 flex justify-center">
             <button
-              className="w-full py-3"
-              style={{
-                borderRadius: "52px",
-                backgroundColor: "#2450A0",
-              }}
+              className="w-full sm:w-[30%] py-3"
+              style={{ borderRadius: "52px", backgroundColor: "#2450A0" }}
             >
-              <span
-                style={{
-                  fontSize: "14px",
-                  fontWeight: "500",
-                  color: "#FFFFFF",
-                }}
-              >
-                SUBMIT
-              </span>
+              <span className="text-white font-medium text-sm">SUBMIT</span>
             </button>
           </div>
         </div>

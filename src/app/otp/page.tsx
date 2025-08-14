@@ -61,7 +61,7 @@ export default function Page1() {
           {/* Call Icon */}
           <div className="flex justify-start mt-6">
             <div
-              className="w-[60px] h-[60px] flex items-center justify-center border border-[#E6E6E6] rounded-[12px] bg-white"
+              className="md:hidden w-[60px] h-[60px] flex items-center justify-center border border-[#E6E6E6] rounded-[12px] bg-white"
               style={{ border: "solid #0000001C", borderRadius: "20px" }}
             >
               <img
