@@ -10,7 +10,14 @@ export default function BuilderOrInvestor() {
   const [selected, setSelected] = useState<"Investor" | "Builder">("Builder");
 
   // Location search states
-  const allLocations = ["Mumbai", "Mumbala", "Green Park", "Indore", "Delhi", "Pune"];
+  const allLocations = [
+    "Mumbai",
+    "Mumbala",
+    "Green Park",
+    "Indore",
+    "Delhi",
+    "Pune",
+  ];
   const [inputValue, setInputValue] = useState("");
   const [tags, setTags] = useState<string[]>([]);
 
@@ -63,9 +70,12 @@ export default function BuilderOrInvestor() {
         className="pt-[120px] pb-12 flex justify-center relative z-10"
         style={{ top: "37px", paddingBottom: "120px" }}
       >
-        <div className="w-full max-w-[650px] px-4" style={{ maxWidth: "1299px" }}>
+        <div
+          className="w-full max-w-[650px] px-4"
+          style={{ maxWidth: "1299px" }}
+        >
           <div
-            className="w-[50px] h-[50px] flex items-center justify-center border border-[#E6E6E6] rounded-[12px] bg-white block md:hidden"
+            className="w-[50px] h-[50px] items-center justify-center border border-[#E6E6E6] rounded-[12px] bg-white block md:hidden"
             style={{ border: "solid #0000001C", borderRadius: "16px" }}
           >
             <img
@@ -110,7 +120,8 @@ export default function BuilderOrInvestor() {
               fontWeight: "400",
             }}
           >
-            Partner with top-tier builders curated for your location, budget, and project goals.
+            Partner with top-tier builders curated for your location, budget,
+            and project goals.
           </p>
 
           {/* Address Input */}
@@ -151,13 +162,12 @@ export default function BuilderOrInvestor() {
                   </span>
                 ))}
                 <input
-  type="text"
-  value={inputValue}
-  onChange={(e) => setInputValue(e.target.value)}
-  className="outline-none text-sm text-gray-700 flex-1"
-  autoComplete="off"
-/>
-
+                  type="text"
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  className="outline-none text-sm text-gray-700 flex-1"
+                  autoComplete="off"
+                />
               </div>
 
               {/* Search Icon */}
@@ -199,16 +209,17 @@ export default function BuilderOrInvestor() {
             >
               Select Plot Siz<span className="text-red-500">*</span>
             </label>
-            <div className="flex items-center border border-[#E5E7EB] rounded-full px-4 py-3 bg-white" style={{borderRadius:'15px'}}>
+            <div
+              className="flex items-center border border-[#E5E7EB] rounded-full px-4 py-3 bg-white"
+              style={{ borderRadius: "15px" }}
+            >
               <input
                 type="text"
                 placeholder="Enter Plot Area"
                 className="flex-1 outline-none text-sm text-gray-700 placeholder-gray-400"
               />
               <div className="relative">
-                <select
-                  className="appearance-none pl-3 pr-6 py-1 rounded-full bg-[#F9FAFB] border border-[#E5E7EB] text-gray-700 text-sm outline-none cursor-pointer"
-                >
+                <select className="appearance-none pl-3 pr-6 py-1 rounded-full bg-[#F9FAFB] border border-[#E5E7EB] text-gray-700 text-sm outline-none cursor-pointer">
                   <option value="sqft">sqft</option>
                   <option value="sqm">sqm</option>
                 </select>
@@ -219,7 +230,12 @@ export default function BuilderOrInvestor() {
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
               </div>
             </div>

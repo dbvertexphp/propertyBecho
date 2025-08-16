@@ -35,6 +35,7 @@ export default function UploadListing() {
   const displayedImages = [
     "/upload_listing/img4.png",
     "/upload_listing/img5.png",
+    "/upload_listing/img4.png",
     "/upload_listing/img6.png",
   ];
 
@@ -132,48 +133,109 @@ export default function UploadListing() {
           </div>
 
           {/* Document Dropdown */}
-          <div className="mb-4" ref={wrapperRef}>
-            <label className="text-sm font-semibold block mb-2 text-black">
-              <span style={{ fontSize: "16px", fontWeight: "700", color: "#0A0909" }}>
-                Select Your Document
-              </span>{" "}
-              <span className="text-red-500">*</span>
-            </label>
+           <div
+  className="mb-4 relative"
+  ref={wrapperRef}
+  style={{ borderRadius: "16px" }}
+>
+  <label className="text-sm font-semibold block mb-2 text-black">
+    <span
+      style={{
+        fontSize: "16px",
+        fontWeight: "700",
+        color: "#0A0909",
+      }}
+    >
+      Select Your Document
+    </span>{" "}
+    <span className="text-red-500">*</span>
+  </label>
 
-            <div
-              onClick={() => setIsOpen(!isOpen)}
-              className="relative border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-600 cursor-pointer bg-white"
-            >
-              {selected || "Select document"}
+  {/* Select box */}
+  <div
+    onClick={() => setIsOpen(!isOpen)}
+    className="relative border border-gray-300 rounded-lg px-4 py-3 text-sm text-gray-600 cursor-pointer bg-white"
+    style={{ borderRadius: "16px" }}
+  >
+    {selected || "Select document"}
 
-              <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                <Image
-                  src={isOpen ? "/upload_listing/button1.png" : "/upload_listing/arrow_down.png"}
-                  alt="Dropdown Icon"
-                  width={25}
-                  height={20}
-                />
-              </div>
-            </div>
+    {/* Icon */}
+    <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+      <Image
+        src={
+          isOpen
+            ? "/upload_listing/button1.png"
+            : "/upload_listing/arrow_down.png"
+        }
+        alt="Dropdown Icon"
+        width={25}
+        height={20}
+      />
+    </div>
+  </div>
 
-            {isOpen && (
-              <ul className="absolute z-10 mt-2 max-h-60 w-full overflow-y-scroll bg-white border border-gray-300 rounded-lg shadow-md text-sm">
-                {documents.map((doc, index) => (
-                  <li
-                    key={index}
-                    onClick={() => {
-                      setSelected(doc);
-                      setIsOpen(false);
-                    }}
-                    className="px-4 py-2 cursor-pointer hover:bg-[#E7ECF5] hover:text-[#2450A0]"
-                    style={{ fontSize: "15px", fontWeight: 700, color: "#6e7381" }}
-                  >
-                    {doc}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
+  {/* Dropdown list */}
+  {isOpen && (
+    <ul
+      className="absolute z-10 mt-2 max-h-60 w-full overflow-y-scroll bg-white border border-gray-300 rounded-lg shadow-md text-sm"
+      style={{
+        WebkitOverflowScrolling: "touch",
+        overflowY: "scroll",
+        scrollbarWidth: "thin", // for Firefox
+        scrollbarColor: "#2450A0 #0A090926", // for Firefox
+      }}
+    >
+      <style jsx>{`
+        ul::-webkit-scrollbar {
+          width: 8px;
+          height: 3px;
+        }
+
+        ul::-webkit-scrollbar-track {
+          background: #0a090926;
+          border-radius: 8px;
+        }
+
+        ul::-webkit-scrollbar-thumb {
+          background-color: #2450a0;
+          border-radius: 8px;
+        }
+      `}</style>
+
+      {documents.map((doc, index) => (
+        <li
+          key={index}
+          onClick={() => {
+            setSelected(doc);
+            setIsOpen(false);
+          }}
+          className="px-4 py-2 cursor-pointer transition-all duration-200"
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = "#E7ECF5";
+            const span = e.currentTarget.querySelector("span");
+            if (span) span.style.color = "#2450A0";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = "transparent";
+            const span = e.currentTarget.querySelector("span");
+            if (span) span.style.color = "#6e7381";
+          }}
+        >
+          <span
+            style={{
+              fontSize: "15px",
+              fontWeight: "700",
+              color: "#6e7381",
+            }}
+          >
+            {doc}
+          </span>
+        </li>
+      ))}
+    </ul>
+  )}
+</div>
+
 
           {/* Upload Document */}
           <div className="mb-6 w-full">
@@ -222,7 +284,7 @@ export default function UploadListing() {
                     className="w-full rounded-lg object-cover h-40"
                     alt={`Preview ${index}`}
                   />
-                  {index === 2 && !showImg1 && (
+                  {index === 3 && !showImg1 && (
                     <div
                       onClick={() => setShowImg1(true)}
                       className="absolute inset-0 flex items-center justify-center text-white text-lg font-semibold cursor-pointer rounded-lg"
@@ -240,7 +302,7 @@ export default function UploadListing() {
 
             {showImg1 && (
               <div className="grid grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3 mt-4">
-                {Array.from({ length: 9 }).map((_, idx) => (
+                {Array.from({ length: 8 }).map((_, idx) => (
                   <img
                     key={idx}
                     src="/upload_listing/img1.png"
@@ -297,12 +359,13 @@ export default function UploadListing() {
 
           {/* Submit Button */}
           <div className="mt-6 flex justify-center">
-            <button
-              className="w-full sm:w-[30%] py-3"
-              style={{ borderRadius: "52px", backgroundColor: "#2450A0" }}
-            >
-              <span className="text-white font-medium text-sm">SUBMIT</span>
-            </button>
+         <button
+  className="w-full sm:w-[30%] py-3 text-white font-medium text-sm rounded-full transition-all duration-200 bg-[#2450A0] hover:bg-[#1d3663]"
+>
+  SUBMIT
+</button>
+
+
           </div>
         </div>
       </main>

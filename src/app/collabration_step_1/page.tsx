@@ -45,7 +45,7 @@ export default function BuilderOrInvestor() {
       >
         <div className="w-full max-w-[87%] px-4" style={{ maxWidth: "1090px" }}>
           <div
-            className="w-[50px] h-[50px] flex items-center justify-center border border-[#E6E6E6] rounded-[12px] bg-white block md:hidden"
+            className="w-[50px] h-[50px] items-center justify-center border border-[#E6E6E6] rounded-[12px] bg-white block md:hidden"
             style={{ border: "solid #0000001C", borderRadius: "16px" }}
           >
             <img
@@ -55,7 +55,7 @@ export default function BuilderOrInvestor() {
             />
           </div>
 
-          <h2 className="text-2xl font-bold ml-[-150px]" style={{ marginTop: "30px" }}>
+          <h2 className="text-2xl font-bold " style={{ marginTop: "30px" }}>
             <span
               style={{
                 color: "#000000",
@@ -81,7 +81,7 @@ export default function BuilderOrInvestor() {
           </h2>
 
           <p
-            className="text-sm text-gray-500 mt-1 text-[15px] ml-[-150px]"
+            className="text-sm text-gray-500 mt-1 text-[15px]"
             style={{
               marginTop: "12px",
               color: "rgba(102, 102, 102, 1)",

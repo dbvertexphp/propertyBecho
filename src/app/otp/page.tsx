@@ -58,7 +58,7 @@ export default function Page1() {
         style={{ top: "35px" }}
       >
         <div className="w-full max-w-[1090px] px-4 pb-[100px]">
-          {/* Call Icon */}
+          {/* Call Icon (mobile only) */}
           <div className="flex justify-start mt-6">
             <div
               className="md:hidden w-[60px] h-[60px] flex items-center justify-center border border-[#E6E6E6] rounded-[12px] bg-white"
@@ -72,42 +72,30 @@ export default function Page1() {
             </div>
           </div>
 
-          {/* MOBILE VIEW */}
-          <div className="block md:hidden">
-            <h2 className="mt-[30px] text-[24px] font-bold text-black">
-              OTP Verification
-            </h2>
-            <p className="mt-[15px] text-[14px] text-[#666666]">
-              Enter the verification code we just sent on your phone number
-            </p>
-            {renderOtpForm()}
-          </div>
+          {/* OTP Section (same layout for mobile + desktop) */}
+          <div className="flex items-center justify-center mt-10 md:mt-[-120px] min-h-[400px] md:min-h-screen">
+            <div className="bg-transparent md:bg-white md:rounded-[70px] md:shadow-md md:p-8 md:max-w-[600px] w-full">
+              {/* Heading */}
+              <div className="text-center">
+                <h1 className="text-black text-[24px] md:text-[28px] font-semibold">
+                  Welcome back
+                </h1>
+                <div className="flex items-baseline gap-2 justify-center">
+                  <h2 className="text-[#2450A0] text-[24px] md:text-[28px] font-bold">
+                    Sign in
+                  </h2>
+                  <span className="text-black text-[24px] md:text-[28px] font-bold">
+                    to continue!
+                  </span>
+                </div>
+              </div>
 
-          {/* DESKTOP VIEW (centered white card) */}
-          <div className="hidden md:flex items-center justify-center min-h-screen mt-[-120px]">
-            <div className="bg-white rounded-[70px] shadow-md p-8 max-w-[600px] w-full">
-  {/* Heading section - centered */}
-  <div className="text-center">
-    <h1 className="text-black text-[28px] font-semibold">
-      Welcome back
-    </h1>
-    <div className="flex items-baseline gap-2 justify-center">
-      <h2 className="text-[#2450A0] text-[28px] font-bold">
-        Sign in
-      </h2>
-      <span className="text-black text-[28px] font-bold">
-        to continue!
-      </span>
-    </div>
-  </div>
+              <p className="mt-5 text-center text-[14px] md:text-[16px] text-[#666666]">
+                Enter the verification code we just sent on your phone number
+              </p>
 
-  <p className="mt-5 text-center text-[16px] text-[#666666]">
-  Enter the verification code
-</p>
-
-  {renderOtpForm()}
-</div>
-
+              {renderOtpForm()}
+            </div>
           </div>
         </div>
       </main>

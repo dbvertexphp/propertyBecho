@@ -144,13 +144,13 @@ export default function Uploadlisting() {
 
             {/* Submit Button */}
 <div className="flex justify-center">
-  <button
-    type="submit"
-    className="w-[30%] flex justify-center items-center text-white text-sm font-semibold py-3 rounded-full transition-all duration-200 hover:bg-blue-700"
-    style={{ backgroundColor: "#2450A0" }}
-  >
-    SAVE AND NEXT
-  </button>
+       <button
+  type="submit"
+  className="w-full md:w-[469px] mx-auto block text-white text-sm font-semibold py-3 rounded-full transition-all duration-200 hover:bg-blue-700"
+  style={{ backgroundColor: "#2450A0" }}
+>
+  <span style={{fontSize:'14px',fontWeight:'500',color:'#FFFFFF'}}>SAVE AND NEXT</span>
+</button>
 </div>
 
           </form>

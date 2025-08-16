@@ -102,7 +102,7 @@ const Header2 = () => {
                   <hr />
                   <li>
                     <a
-                      href="#"
+                      href="/upload_listing"
                       className="block text-center text-gray-700 font-bold text-sm hover:text-[#2450A0] transition"
                     >
                       Upload Listing

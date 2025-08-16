@@ -148,12 +148,12 @@ export default function FacilitiesDetail() {
                       className="md:w-[250px] w-[100%] h-[45px] rounded-[9px] px-[10px] py-[10px] flex items-center space-x-2"
                       style={{ background: "rgba(36, 80, 160, 0.04)" }}
                     >
-                      <div className="font-semibold text-[14px] md:text-[17px]" style={{ fontWeight: "500" }}>
+                      <div className="font-semibold text-[14px] md:text-[17px]" style={{ fontWeight: "500",position:'relative',top:'5px'}}>
                         {item.label}
                         {item.sub && (
                           <br />
                         )}
-                        <span className="text-[10px] md:text-[12px]" style={{ color: "rgba(10, 9, 9, 0.7)", fontWeight: "400" }}>
+                        <span className="text-[10px] md:text-[12px]" style={{ color: "rgba(10, 9, 9, 0.7)", fontWeight: "400",position:'relative',bottom:'9px'}}>
                           {item.sub}
                         </span>
                       </div>
@@ -214,8 +214,8 @@ export default function FacilitiesDetail() {
                         className={`w-[40px] h-[40px] ${isSelected ? "icon-selected" : "icon-unselected"}`}
                       />
                       <span
-                        className={`text-sm mt-2 font-medium ${isSelected ? "text-[#0052CC]" : "text-[rgba(113,117,128,1)]"}`}
-                        style={{ fontSize: "14px", fontWeight: "500" }}
+                        className={`text-[12px] md:text-[14px] mt-2 font-medium ${isSelected ? "text-[#0052CC]" : "text-[rgba(113,117,128,1)]"}`}
+                        style={{ fontWeight: "500" }}
                       >
                         {item.label}
                       </span>
@@ -244,9 +244,9 @@ export default function FacilitiesDetail() {
                           className={`w-[40px] h-[40px] ${isSelected ? "icon-selected" : "icon-unselected"}`}
                         />
                         <span
-                          className="text-sm mt-2 text-center"
+                          className="text-[12px] md:text-[14px] mt-2 text-center"
                           style={{
-                            fontSize: "14px",
+                          
                             fontWeight: "500",
                             color: isSelected ? "#0052CC" : "rgba(113,117,128,1)",
                           }}

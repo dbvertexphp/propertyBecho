@@ -86,7 +86,7 @@ export default function Page1() {
             <div className="flex flex-row justify-center gap-8 sm:gap-12 lg:gap-20 mt-10">
               {/* Residential */}
               <div
-                onClick={() => setSelected("RESIDENTIAL")}
+                onClick={() => setSelected("COMMERCIAL")}
                 className={`relative md:mt-5 md:h-[90px] h-[90px] w-[140px] sm:w-[200px] overflow-visible flex flex-col items-center justify-end pt-12 sm:pt-16 cursor-pointer transition-all duration-200 rounded-[21px]
                   ${
                     isSelected("RESIDENTIAL")
@@ -96,28 +96,33 @@ export default function Page1() {
                 style={{ paddingBottom: "8px" }}
               >
                 <Image
-                  src="/home1.png"
-                  alt="Residential"
-                  width={120}
-                  height={120}
-                  className="absolute mb-4 sm:mb-6 left-1/2 -translate-x-1/2 scale-x-[-1]"
-                />
+  src="/home1.png"
+  alt="Residential"
+  width={120}
+  height={120}
+  className="
+    absolute left-1/2 -translate-x-1/2 scale-x-[-1]
+    w-[96px] bottom-[38px]     /* mobile ke liye */
+    md:w-[120px] md:bottom-auto md:mb-4 md:sm:mb-6   /* desktop ke liye */
+  "
+/>
+
                 <p
                   style={{
                     fontWeight: 500,
                     fontSize: "15px",
-                    color: isSelected("RESIDENTIAL")
+                    color: isSelected("COMMERCIAL")
                       ? "#2450A0"
                       : "rgb(110 116 133)",
                   }}
                 >
-                  RESIDENTIAL
+                  COMMERCIAL
                 </p>
               </div>
 
               {/* Commercial */}
               <div
-                onClick={() => setSelected("COMMERCIAL")}
+                onClick={() => setSelected("RESIDENTIAL")}
                 className={`relative md:mt-5 md:h-[90px] h-[90px] w-[140px] sm:w-[200px] overflow-visible flex flex-col items-center justify-end pt-12 sm:pt-16 cursor-pointer transition-all duration-200 rounded-[21px]
                   ${
                     isSelected("COMMERCIAL")
@@ -131,19 +136,24 @@ export default function Page1() {
                   alt="Commercial"
                   width={120}
                   height={120}
-                  className="absolute mb-4 sm:mb-6 left-1/2 -translate-x-1/2 scale-x-[-1]"
+                 className="
+    absolute left-1/2 -translate-x-1/2 scale-x-[-1]
+    w-[96px] bottom-[38px]     /* mobile ke liye */
+    md:w-[120px] md:bottom-auto md:mb-4 md:sm:mb-6   /* desktop ke liye */
+  "
                 />
                 <p
                   style={{
                     fontWeight: 600,
                     fontSize: "15px",
                     textAlign: "center",
-                    color: isSelected("COMMERCIAL")
+                    color: isSelected("RESIDENTIAL")
                       ? "#2450A0"
                       : "rgb(110 116 133)",
                   }}
                 >
-                  COMMERCIAL
+                  RESIDENTIAL
+                  
                 </p>
               </div>
             </div>

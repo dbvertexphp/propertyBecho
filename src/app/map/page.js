@@ -7,6 +7,12 @@ import { FiHeart } from "react-icons/fi";
 import Header2 from "@/components/Header2";
 import Footer from "@/components/Footer";
 import FilterModal from "@/components/Filter";
+import dynamic from "next/dynamic";
+
+// Dynamically import the Map component with SSR disabled
+const Map = dynamic(() => import("@/components/Map"), {
+  ssr: false, // Disable server-side rendering
+});
 
 export default function PropertyWithMap() {
   // 🔸 State definitions
@@ -222,8 +228,15 @@ export default function PropertyWithMap() {
                     onClick={() => setShowFilterModal(!showFilterModal)}
                   >
                     <div className="flex items-center bg-gray-100 px-4 py-1 rounded-xl">
-                      <Image src="/filter.png" alt="Filter" width={16} height={16} />
-                      <p className="text-sm text-gray-700 whitespace-nowrap ml-1">Filter</p>
+                      <Image
+                        src="/filter.png"
+                        alt="Filter"
+                        width={16}
+                        height={16}
+                      />
+                      <p className="text-sm text-gray-700 whitespace-nowrap ml-1">
+                        Filter
+                      </p>
                       <IoIosArrowDown className="text-gray-500 text-base ml-1" />
                     </div>
                   </div>
@@ -245,10 +258,17 @@ export default function PropertyWithMap() {
                     onClick={() => setShowSortDropdown(!showSortDropdown)}
                   >
                     <div className="flex items-center bg-gray-100 px-2 py-1 rounded-xl">
-                      <p className="text-sm text-gray-700 whitespace-nowrap">Sort by</p>
+                      <p className="text-sm text-gray-700 whitespace-nowrap">
+                        Sort by
+                      </p>
                       <IoIosArrowDown className="text-gray-500 text-base ml-1" />
                     </div>
-                    <Image src="/arrow-swap.png" alt="Swap" width={16} height={16} />
+                    <Image
+                      src="/arrow-swap.png"
+                      alt="Swap"
+                      width={16}
+                      height={16}
+                    />
                   </div>
                   {showSortDropdown && (
                     <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-md z-10">
@@ -275,13 +295,10 @@ export default function PropertyWithMap() {
                 </div>
               </div>
 
-              <Image
-                src="/maplocation.png"
-                alt="Map View"
-                width={150}
-                height={150}
-                className="w-full h-[500px] object-cover rounded-lg mt-8"
-              />
+              <div className="md:w-1/2 h-[calc(100vh-120px)] sticky top-[120px]">
+                <Map />
+              </div>
+
               {!showFilterModal && (
                 <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 block md:hidden">
                   <button onClick={() => setShowMobileMap(false)}>
@@ -438,7 +455,7 @@ export default function PropertyWithMap() {
                     className="bg-white border border-gray-300 rounded-2xl px-3 py-2 w-32 flex items-center gap-2 shadow-sm cursor-pointer"
                     onClick={() => setShowSortDropdown(!showSortDropdown)}
                   >
-                    <div className="flex items-center bg-gray-100 px-2 py-1 rounded-2xl">
+                    <div className="flex items-center bg-gray-100 px-2 py-1 rounded-xl">
                       <p className="text-sm text-gray-700 whitespace-nowrap">
                         Sort by
                       </p>
@@ -480,13 +497,7 @@ export default function PropertyWithMap() {
             {/* 🔹 Desktop Layout: Map + Cards */}
             <div className="hidden md:flex mt-8 mx-auto max-w-[87%] px-4">
               <div className="md:w-1/2 h-[calc(100vh-120px)] sticky top-[120px]">
-                <Image
-                  src="/maplocation.png"
-                  alt="Map"
-                  width={600}
-                  height={800}
-                  className="w-full h-full object-cover"
-                />
+                <Map />
               </div>
               <div className="md:w-1/2 overflow-y-auto h-[calc(100vh-120px)] px-4 py-6 hide-scrollbar">
                 <div className="grid grid-cols-2 gap-2">
@@ -513,43 +524,32 @@ export default function PropertyWithMap() {
                           <Image
                             src={
                               likedStates[index]
-                                ? "/Heart button.svg"
-                                : "/Heart button icon.svg"
+                                ? "/Heart buttion.svg"
+                                : "/Heart buttion icon.svg"
                             }
                             alt="like"
                             width={20}
                             height={20}
-                            className="w-10 h-10 transition-all duration-200"
+                            className="w-10 h-10 transition-all duration-200 mt-[210px]"
                           />
                         </button>
                       </div>
                       <div className="p-4">
                         <div className="flex justify-between items-center">
-                          <p className="text-lg font-extrabold text-black">
+                          <p className="text-lg font-extrabold text-black -mt-4">
                             ${parseInt(property.price).toLocaleString("en-US")}
                           </p>
                         </div>
-                        <p className="text-sm text-gray-500">
-                          {property.ownerType}
-                        </p>
+                        <p className="text-sm text-gray-500">{property.ownerType}</p>
                         <div className="flex flex-wrap gap-2 mt-3">
                           <span className="bg-gray-100 px-2 py-1 text-xs font-bold text-gray-700 rounded-full">
-                            <span className="text-[#2b56b6]">
-                              {property.bhk}
-                            </span>{" "}
-                            BHK
+                            <span className="text-[#2b56b6]">{property.bhk}</span> BHK
                           </span>
                           <span className="bg-gray-100 px-2 py-1 text-xs font-bold text-gray-700 rounded-full">
-                            <span className="text-[#2b56b6]">
-                              {property.bath}
-                            </span>{" "}
-                            Bath
+                            <span className="text-[#2b56b6]">{property.bath}</span> Bath
                           </span>
                           <span className="bg-gray-100 px-2 py-1 text-xs font-bold text-gray-700 rounded-full">
-                            <span className="text-[#2b56b6]">
-                              {property.sqft}
-                            </span>{" "}
-                            sqft
+                            <span className="text-[#2b56b6]">{property.sqft}</span> sqft
                           </span>
                         </div>
                         <div className="flex items-center gap-2 mt-3 text-xs font-bold text-gray-600 border border-gray-200 px-3 py-1 rounded-full">
@@ -688,10 +688,7 @@ export default function PropertyWithMap() {
                                       type="checkbox"
                                       checked={filters[filter.toLowerCase()] === option}
                                       onChange={() =>
-                                        handleFilterChange(
-                                          filter.toLowerCase(),
-                                          option
-                                        )
+                                        handleFilterChange(filter.toLowerCase(), option)
                                       }
                                       className="accent-[#2450A0]"
                                     />
@@ -717,7 +714,7 @@ export default function PropertyWithMap() {
                         className="bg-white border border-gray-300 rounded-2xl px-3 py-2 w-32 flex items-center gap-2 shadow-sm cursor-pointer"
                         onClick={() => setShowSortDropdown(!showSortDropdown)}
                       >
-                        <div className="flex items-center bg-gray-100 px-2 py-1 rounded-2xl">
+                        <div className="flex items-center bg-gray-100 px-2 py-1 rounded-xl">
                           <p className="text-sm text-gray-700 whitespace-nowrap">
                             Sort by
                           </p>
@@ -756,66 +753,57 @@ export default function PropertyWithMap() {
                   </div>
                 </div>
               </div>
-              <div className="grid grid-cols-1 gap-2 py-10">
+              <div className="grid grid-cols-1 gap-4 py-10 place-items-center">
                 {sortedData.map((property, index) => (
                   <div
                     key={index}
-                    className="bg-white w-full rounded-2xl shadow-lg overflow-hidden relative"
+                    className="bg-white w-[90%] rounded-2xl shadow-lg overflow-hidden relative"
                   >
-                    <div className="relative">
+                    <div className="relative w-full flex justify-center">
                       <Image
                         src={property.imageUrl}
                         alt={`Property ${index + 1}`}
-                        width={400}
-                        height={300}
-                        className="w-full h-56 object-cover"
+                        width={500}
+                        height={180}
+                        className="rounded-xl object-cover"
                       />
                       <button
                         onClick={(e) => {
                           e.preventDefault();
                           toggleLike(index);
                         }}
-                        className="absolute top-2 right-2"
+                        className="absolute right-2 top-[250px]"
                       >
                         <Image
                           src={
                             likedStates[index]
-                              ? "/Heart button.svg"
-                              : "/Heart button icon.svg"
+                              ? "/Heart buttion.svg"
+                              : "/Heart buttion icon.svg"
                           }
                           alt="like"
-                          width={20}
-                          height={20}
+                          width={40}
+                          height={40}
                           className="w-10 h-10 transition-all duration-200"
                         />
                       </button>
                     </div>
                     <div className="p-4 space-y-1">
-                      <h2 className="text-lg font-extrabold text-black">
+                      <h2 className="text-lg font-extrabold text-black -mt-4">
                         ${parseInt(property.price).toLocaleString("en-US")}
                       </h2>
-                      <p className="text-xs text-gray-600">
-                        {property.ownerType}
-                      </p>
+                      <p className="text-xs text-gray-600">{property.ownerType}</p>
                       <div className="flex flex-wrap gap-2 mt-3">
                         <span className="bg-gray-100 px-2 py-1 rounded-2xl text-xs font-bold text-gray-700">
-                          <span className="text-[#2b56b6]">{property.bhk}</span>{" "}
-                          BHK
+                          <span className="text-[#2b56b6]">{property.bhk}</span> BHK
                         </span>
                         <span className="bg-gray-100 px-2 py-1 rounded-2xl text-xs font-bold text-gray-700">
-                          <span className="text-[#2b56b6]">
-                            {property.bath}
-                          </span>{" "}
-                          Bath
+                          <span className="text-[#2b56b6]">{property.bath}</span> Bath
                         </span>
                         <span className="bg-gray-100 px-2 py-1 rounded-2xl text-xs font-bold text-gray-700">
-                          <span className="text-[#2b56b6]">
-                            {property.sqft}
-                          </span>{" "}
-                          sqft
+                          <span className="text-[#2b56b6]">{property.sqft}</span> sqft
                         </span>
                       </div>
-                      <div className="flex items-center gap-2 mt-3 text-xs font-bold text-gray-600">
+                      <div className="flex items-center gap-2 mt-3 text-xs font-bold text-gray-600 border border-gray-200 px-3 py-1 rounded-full">
                         <Image
                           src="/loc.png"
                           alt="location"
@@ -823,9 +811,7 @@ export default function PropertyWithMap() {
                           height={16}
                           className="w-4 h-4"
                         />
-                        <p className="text-sm text-gray-800 font-semibold">
-                          {property.address}
-                        </p>
+                        <span>{property.address}</span>
                       </div>
                     </div>
                   </div>

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Header2 from "@/components/Header2";
 
-export default function MovingDetail() {
+export default function r_step_6() {
   return (
     <div className="relative text-gray-900 bg-gray-50 min-h-screen overflow-hidden" style={{ fontFamily: 'Poppins, sans-serif' }}>
       {/* Poppins Font Import */}
@@ -35,7 +35,7 @@ export default function MovingDetail() {
 
       {/* Main Content */}
       <main className="pt-[310px] pb-12 flex justify-center relative z-10">
-        <div className="w-[375px] px-4 flex flex-col items-center gap-[10px] text-center">
+        <div className="w-[375px] px-4 flex flex-col items-center gap-[10px] text-center" style={{position:'relative',bottom:"125px"}}>
           <h2 className="font-extrabold" style={{fontSize:'34px'}}>
             <span style={{color:'rgba(0, 0, 0, 1)',fontWeight:'700'}}>Get </span>
             <span className="text-[#2450A0]">Valuation</span>
@@ -64,13 +64,13 @@ export default function MovingDetail() {
 
       {/* Bottom Left Background Shape */}
       <img
-        src="bubble 4.png"
+        src="/bubble_4.png"
         alt="Bottom Wave"
         className="absolute bottom-0 z-0"
         style={{ width: "181px" }}
       />
       <img
-        src="bubble 3.png"
+        src="/bubble_3.png"
         alt="Bottom Wave"
         className="absolute bottom-0 z-0"
         style={{ width: "180px", left: '100px' }}

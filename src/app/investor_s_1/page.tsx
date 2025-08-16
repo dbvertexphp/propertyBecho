@@ -46,7 +46,7 @@ export default function BuilderOrInvestor() {
         style={{ top: "37px", paddingBottom: "120px" }}
       >
         
-        <div className="w-full max-w-[87%] mx-auto px-4" style={{ maxWidth: "1089px" }}>
+        <div className="w-full max-w-[87%] mx-auto px-4" style={{ maxWidth: "1367px" }}>
        <div 
   className="w-[50px] h-[50px] flex items-center justify-center border border-[#E6E6E6] rounded-[12px] bg-white md:hidden"
   style={{ border: 'solid #0000001C', borderRadius: '16px' }}
@@ -59,20 +59,22 @@ export default function BuilderOrInvestor() {
 </div>
 
             
-          <h2 className="text-2xl font-bold ml-[-150px]" style={{marginTop:'30px'}}>
-            <span
-              style={{
-                color: "#000000",
-                fontWeight: "700",
-                fontSize: "24px",
-                lineHeight: "29px",
-                width: "343px",
-                height: "58px",
-              }}
-            >
-              Start Your
+          <h2 className="text-2xl font-bold ml-[-150px] " style={{marginTop:'30px'}}>
+       <span
+  className="ml-[148px] md:ml-[150px] md:mt-[20px]"
+  style={{
+    color: "#000000",
+    fontWeight: "700",
+    fontSize: "24px",
+    lineHeight: "29px",
+    width: "343px",
+    height: "58px",
+  }}
+>
+  Start Your
+</span>{" "}
 
-            </span>{" "}
+
             <span
               style={{
                 color: "#2450A0",
@@ -87,7 +89,7 @@ export default function BuilderOrInvestor() {
           </h2>
 
           <p
-            className="text-sm text-gray-500 mt-1 text-[15px] ml-[-150px]"
+            className="text-sm text-gray-500 mt-1 text-[15px] ml-[2px]"
             style={{
               marginTop: "12px",
               color: "rgba(102, 102, 102, 1)",
@@ -157,7 +159,7 @@ export default function BuilderOrInvestor() {
                 className="
                   absolute mt-4 cursor-pointer
                   left-1/2 -translate-x-1/2
-                  lg:left-[799px] lg:translate-x-0
+                  lg:left-[637px] lg:translate-x-0
                 "
               />
             </Link>

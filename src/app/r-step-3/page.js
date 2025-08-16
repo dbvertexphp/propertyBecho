@@ -92,7 +92,7 @@ export default function PropertyTypeSelection() {
             little as 3 minutes.
           </p>
 
-          <div className="bg-white rounded-2xl shadow-md mt-6 p-4 md:h-[380px]">
+          <div className="bg-white rounded-2xl shadow-md mt-6 p-4">
             <h3
               className="mb-4 border-l-4 pl-3 text-lg md:text-2xl font-semibold mt-mt-1"
               style={{ borderColor: "#2450A0" }}
@@ -148,7 +148,7 @@ export default function PropertyTypeSelection() {
                       className="w-9 h-9 object-contain"
                     />
                   </div>
-                  <span style={{ fontWeight: "500" }}>{option.label}</span>
+                  <span className="text-[12px]" style={{ fontWeight: "500" }}>{option.label}</span>
                 </button>
               ))}
             </div>
