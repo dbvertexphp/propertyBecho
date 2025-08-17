@@ -128,14 +128,14 @@ export default function BuilderOrInvestor() {
                 style={{
                   paddingBottom: "8px",
                   width: "200px",
-                  height: "89px",
+                  height: "95px",
                 }}
               >
                 <Image
-                  src="/collaboration/builder.png"
+                  src="/collaboration/investor1.svg"
                   alt="Residential"
                   width={120}
-                  height={100}
+                  height={120}
                 />
                 <p
                   style={{
@@ -165,11 +165,11 @@ export default function BuilderOrInvestor() {
                 style={{
                   paddingBottom: "8px",
                   width: "200px",
-                  height: "89px",
+                  height: "95px",
                 }}
               >
                 <Image
-                  src="/collaboration/investor.png"
+                  src="/collaboration/investor.svg"
                   alt="Commercial"
                   width={120}
                   height={43}

@@ -1,60 +1,54 @@
+// Map.tsx
 "use client";
 
-import { useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { FaMapMarkerAlt } from "react-icons/fa";
-import ReactDOMServer from "react-dom/server";
 
-// Create a FontAwesome marker using divIcon + React
-const customIcon = L.divIcon({
-  html: ReactDOMServer.renderToString(
-    <FaMapMarkerAlt className="text-red-600 text-3xl" /> // Tailwind styling
-  ),
-  className: "custom-fa-icon", // prevents default leaflet styles
+type MarkerData = {
+  id: number;
+  position: [number, number];
+  title: string;
+  price: number | string;
+};
+
+type MapProps = {
+  center: [number, number];
+  markers: MarkerData[];
+};
+
+// ✅ Custom location pin (red)
+const customPinIcon = L.divIcon({
+  className: "custom-pin",
+  html: `
+    <svg xmlns="http://www.w3.org/2000/svg" fill="red" viewBox="0 0 24 24" width="32" height="32">
+      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 
+      9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 
+      6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/>
+    </svg>
+  `,
   iconSize: [32, 32],
-  iconAnchor: [16, 32],
+  iconAnchor: [16, 32], // bottom center
+  popupAnchor: [0, -32],
 });
 
-// 🔹 Handles map clicks & updates marker position
-function LocationMarker({ setPosition }: { setPosition: (pos: [number, number]) => void }) {
-  useMapEvents({
-    click(e) {
-      setPosition([e.latlng.lat, e.latlng.lng]);
-    },
-  });
-  return null;
-}
-
-export default function Map() {
-  const [position, setPosition] = useState<[number, number] | null>([28.6139, 77.2090]); // Default: Delhi
-
+export default function Map({ center, markers }: MapProps) {
   return (
-    <MapContainer
-      center={position || [28.6139, 77.2090]}
-      zoom={13}
-      scrollWheelZoom={true}
-      className="w-full h-full"
-    >
-      {/* Map tiles */}
+    <MapContainer center={center} zoom={13} style={{ height: "500px", width: "100%" }}>
       <TileLayer
-        attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a>'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
       />
-
-      {/* Marker */}
-      {position && (
-        <Marker position={position} icon={customIcon}>
+      {markers.map((marker) => (
+        <Marker key={marker.id} position={marker.position} icon={customPinIcon}>
           <Popup>
-            📍 Pinned Location <br />
-            {position[0].toFixed(4)}, {position[1].toFixed(4)}
+            <div className="w-40">
+              <p className="font-bold">{marker.title}</p>
+              <p>{marker.price}</p>
+            </div>
           </Popup>
         </Marker>
-      )}
-
-      {/* Listen for clicks */}
-      <LocationMarker setPosition={setPosition} />
+      ))}
     </MapContainer>
   );
 }

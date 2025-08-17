@@ -799,7 +799,7 @@ export default function Home() {
                       </div>
                       <div className="flex items-center gap-2 mt-3 text-xs font-bold text-gray-600 border border-gray-200 rounded-full px-3 py-1">
                         <Image
-                          src="/Locationcard.png"
+                          src="/loc.png"
                           alt="location"
                           width={16}
                           height={16}
