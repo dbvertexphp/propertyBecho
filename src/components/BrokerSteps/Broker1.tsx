@@ -139,7 +139,7 @@ const Step1: React.FC<Step1Props> = ({
             />
             <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
               <img
-                src="/broker/location.webp"
+                src="/locationblue.png"
                 alt="Location Icon"
                 style={{ width: "18px" }}
               />
@@ -293,7 +293,7 @@ const Step1: React.FC<Step1Props> = ({
             />
             <span className="absolute right-6 top-1/2 transform -translate-y-1/2 text-gray-400">
               <img
-                src="/broker/location.webp"
+                src="/locationblue.png"
                 alt="Location Icon"
                 style={{ width: "22px" }}
               />

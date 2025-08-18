@@ -58,7 +58,7 @@ const Step3: React.FC<Step3Props> = ({ formData, setFormData, handleNext, handle
           </div>
         ))}
         <div className="ml-auto mt-1">
-          <img src="/broker/Dropdown.png" alt="dropdown" />
+          <img src="/arrow-down.svg" alt="dropdown" />
         </div>
       </div>
 

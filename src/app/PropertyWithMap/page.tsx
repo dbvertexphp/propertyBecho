@@ -35,7 +35,7 @@ interface Filters {
 }
 
 // Dynamically import the Map component with SSR disabled
-const Map = dynamic(() => import("@/components/Map"), {
+const Map = dynamic(() => import("@/components/Map1"), {
   ssr: false,
 });
 
@@ -682,23 +682,7 @@ export default function PropertyWithMap() {
                     </Link>
                   ))}
                 </div>
-                <div className="flex justify-center mt-6 space-x-2">
-                  <button
-                    disabled={currentPage === 1}
-                    onClick={() => setCurrentPage((p) => p - 1)}
-                    className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-                  >
-                    Prev
-                  </button>
-                  <span className="px-4 py-2">Page {currentPage} of {totalPages}</span>
-                  <button
-                    disabled={currentPage === totalPages}
-                    onClick={() => setCurrentPage((p) => p + 1)}
-                    className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-                  >
-                    Next
-                  </button>
-                </div>
+                
               </div>
             </div>
 

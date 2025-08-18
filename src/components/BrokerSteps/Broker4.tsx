@@ -72,7 +72,7 @@ const Step4: React.FC<Step4Props> = ({
           </div>
         ))}
         <div className="ml-auto mt-1">
-          <img src="/broker/Dropdown.png" alt="dropdown" />
+          <img src="/arrow-down.svg" alt="dropdown" />
         </div>
       </div>
 

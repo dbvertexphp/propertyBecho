@@ -88,12 +88,12 @@ export default function Step2({
       {/* Info Banner */}
       <div className="flex items-start gap-2 bg-[#e7eef9] p-2 rounded-md w-full md:w-[600px] ">
         <img
-          src="/broker/icon.png"
+          src="/icon.svg"
           alt="Info Icon"
-          className="w-4 h-4 mt-[1px] flex-shrink-0"
+          className="w-6 h-6 mt-[-5px] flex-shrink-0"
         />
         <p
-          style={{ fontSize: "13px", fontWeight: "500" }}
+          style={{ fontSize: "14px", fontWeight: "500" }}
           className="text-[#2450A0]"
         >
           All things chosen next are for leads that will be provided so choose

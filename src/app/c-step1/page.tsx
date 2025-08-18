@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function Page1() {
-  const [selected, setSelected] = useState("COMMERCIAL");
+  const [selected, setSelected] = useState("");
 
   const isSelected = (type: string) => selected === type;
 
@@ -86,8 +86,11 @@ export default function Page1() {
             <div className="flex flex-row justify-center gap-8 sm:gap-12 lg:gap-20 mt-10">
               {/* Residential */}
               <div
-                onClick={() => setSelected("COMMERCIAL")}
-                className={`relative md:mt-5 md:h-[90px] h-[90px] w-[140px] sm:w-[200px] overflow-visible flex flex-col items-center justify-end pt-12 sm:pt-16 cursor-pointer transition-all duration-200 rounded-[21px]
+                onClick={() => {
+                  console.log("Residential clicked");
+                  setSelected("RESIDENTIAL");
+                }}
+                className={`relative md:mt-5 md:h-[90px] h-[90px] w-[140px] sm:w-[200px] flex flex-col items-center justify-end pt-12 sm:pt-16 cursor-pointer transition-all duration-200 rounded-[21px] z-20
                   ${
                     isSelected("RESIDENTIAL")
                       ? "border border-[#2450A0] bg-white"
@@ -96,34 +99,37 @@ export default function Page1() {
                 style={{ paddingBottom: "8px" }}
               >
                 <Image
-  src="/home1.png"
-  alt="Residential"
-  width={120}
-  height={120}
-  className="
-    absolute left-1/2 -translate-x-1/2 scale-x-[-1]
-    w-[96px] bottom-[38px]     /* mobile ke liye */
-    md:w-[120px] md:bottom-auto md:mb-4 md:sm:mb-6   /* desktop ke liye */
-  "
-/>
-
+                  src="/home1.png"
+                  alt="Residential"
+                  width={120}
+                  height={120}
+                  className="
+                    absolute left-1/2 -translate-x-1/2 scale-x-[-1]
+                    w-[96px] bottom-[38px]
+                    md:w-[120px] md:bottom-auto md:mb-4 md:sm:mb-6
+                    pointer-events-none
+                  "
+                />
                 <p
                   style={{
-                    fontWeight: 500,
+                    fontWeight: 600,
                     fontSize: "15px",
-                    color: isSelected("COMMERCIAL")
+                    color: isSelected("RESIDENTIAL")
                       ? "#2450A0"
                       : "rgb(110 116 133)",
                   }}
                 >
-                  COMMERCIAL
+                  RESIDENTIAL
                 </p>
               </div>
 
               {/* Commercial */}
               <div
-                onClick={() => setSelected("RESIDENTIAL")}
-                className={`relative md:mt-5 md:h-[90px] h-[90px] w-[140px] sm:w-[200px] overflow-visible flex flex-col items-center justify-end pt-12 sm:pt-16 cursor-pointer transition-all duration-200 rounded-[21px]
+                onClick={() => {
+                  console.log("Commercial clicked");
+                  setSelected("COMMERCIAL");
+                }}
+                className={`relative md:mt-5 md:h-[90px] h-[90px] w-[140px] sm:w-[200px] flex flex-col items-center justify-end pt-12 sm:pt-16 cursor-pointer transition-all duration-200 rounded-[21px] z-20
                   ${
                     isSelected("COMMERCIAL")
                       ? "border border-[#2450A0] bg-white"
@@ -136,30 +142,30 @@ export default function Page1() {
                   alt="Commercial"
                   width={120}
                   height={120}
-                 className="
-    absolute left-1/2 -translate-x-1/2 scale-x-[-1]
-    w-[96px] bottom-[38px]     /* mobile ke liye */
-    md:w-[120px] md:bottom-auto md:mb-4 md:sm:mb-6   /* desktop ke liye */
-  "
+                  className="
+                    absolute left-1/2 -translate-x-1/2 scale-x-[-1]
+                    w-[96px] bottom-[38px]
+                    md:w-[120px] md:bottom-auto md:mb-4 md:sm:mb-6
+                    pointer-events-none
+                  "
                 />
                 <p
                   style={{
                     fontWeight: 600,
                     fontSize: "15px",
                     textAlign: "center",
-                    color: isSelected("RESIDENTIAL")
+                    color: isSelected("COMMERCIAL")
                       ? "#2450A0"
                       : "rgb(110 116 133)",
                   }}
                 >
-                  RESIDENTIAL
-                  
+                  COMMERCIAL
                 </p>
               </div>
             </div>
 
             {/* Property Type Tag */}
-            <div className="absolute left-1/2 -bottom-4 transform -translate-x-1/2 bg-white text-black md:text-lg text:sm font-semibold px-4 py-1 rounded-full shadow-md border border-gray-200">
+            <div className="absolute left-1/2 -bottom-4 transform - Ascendancy -translate-x-1/2 bg-white text-black md:text-lg text:sm font-semibold px-4 py-1 rounded-full shadow-md border border-gray-200">
               <span
                 style={{
                   fontSize: "12px",

@@ -172,7 +172,7 @@ export default function Home() {
       {/* 🔹 Banner Section */}
       <section
         className="relative w-full md:h-[97vh] h-[90vh] bg-cover bg-center"
-        style={{ backgroundImage: "url('/banner.PNG')" }}
+        style={{ backgroundImage: "url('/banner2.png')" }}
       >
         <div className="relative z-20 h-full flex flex-col justify-center px-6 md:px-12 pt-32">
           <div className="text-center md:text-left md:ml-[120px]">

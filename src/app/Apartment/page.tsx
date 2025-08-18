@@ -1,3 +1,147 @@
+// "use client";
+
+// import Image from "next/image";
+// import Header2 from "@/components/Header2";
+// import Footer from "@/components/Footer";
+
+// export default function Details() {
+//   return (
+//     <div>
+//       <Header2 />
+
+//       {/* 🖼️ Centered Image before Footer */}
+//       <div className="md:w-[99%] md:h-[95vh] w-[95%] h-[55vh] relative mx-auto md:mt-1 mt-[150px] rounded-xl overflow-hidden">
+//         {/* ✅ Image */}
+//         <Image
+//           src="/appartment.png"
+//           alt="Banner Before Footer"
+//           fill
+//           className="object-cover"
+//         />
+
+//         {/* ✅ Tag: For sale by owner */}
+//         <div className="absolute top-5 left-0 bg-[#2BAD4A] text-white md:mt-[130px] font-semibold md:px-6 md:py-2 py-1 px-4 rounded-tr-full rounded-br-full shadow-lg z-10">
+
+//         </div>
+//       </div>
+
+//       <Footer />
+//     </div>
+//   );
+// }
+// "use client";
+
+// import Image from "next/image";
+// import Header2 from "@/components/Header2";
+// import Footer from "@/components/Footer";
+// import { FaBath, FaBed, FaRulerCombined, FaMapMarkerAlt } from "react-icons/fa";
+
+// const properties = [
+//   {
+//     id: 1,
+//     price: "$280,000",
+//     owner: "By Owner",
+//     image: "/appartment.png",
+//     bhk: "2 BHK",
+//     bath: "2 BA",
+//     sqft: "24 sqft",
+//     location: "1030 Spruce St, Aurora, IL 60506",
+//     ownerImage: "/profile.png",
+//   },
+//   {
+//     id: 2,
+//     price: "$350,000",
+//     owner: "By Owner",
+//     image: "/appartment.png",
+//     bhk: "3 BHK",
+//     bath: "3 BA",
+//     sqft: "30 sqft",
+//     location: "215 Main St, Denver, CO 80205",
+//     ownerImage: "/profile.png",
+//   },
+//   {
+//     id: 3,
+//     price: "$400,000",
+//     owner: "By Owner",
+//     image: "/appartment.png",
+//     bhk: "4 BHK",
+//     bath: "4 BA",
+//     sqft: "40 sqft",
+//     location: "789 Park Ave, Miami, FL 33101",
+//     ownerImage: "/profile.png",
+//   },
+// ];
+
+// export default function Details() {
+//   return (
+//     <div>
+//       <Header2 />
+
+//       {/* Cards Grid */}
+//       <div className="mt-[150px] md:mt-10 px-4 md:px-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+//         {properties.map((property) => (
+//           <div
+//             key={property.id}
+//             className="bg-white rounded-xl shadow-md overflow-hidden w-full"
+//           >
+//             {/* Image */}
+//             <div className="relative w-full h-[205px] md:h-[250px]">
+//               <Image
+//                 src={property.image}
+//                 alt="Property"
+//                 fill
+//                 className="object-cover"
+//               />
+//             </div>
+
+//             {/* Details */}
+//             <div className="p-4 md:p-5">
+//               {/* Price & Owner */}
+//               <div className="flex items-center justify-between">
+//                 <div>
+//                   <h2 className="text-lg md:text-xl font-bold text-gray-900">
+//                     {property.price}
+//                   </h2>
+//                   <p className="text-sm md:text-base text-gray-500">
+//                     {property.owner}
+//                   </p>
+//                 </div>
+//                 <Image
+//                   src={property.ownerImage}
+//                   alt="Owner"
+//                   width={40}
+//                   height={40}
+//                   className="rounded-full border"
+//                 />
+//               </div>
+
+//               {/* Badges */}
+//               <div className="flex flex-wrap gap-2 mt-3">
+//                 <span className="bg-gray-100 px-3 py-1 rounded-full flex items-center gap-1 text-sm font-medium">
+//                   <FaBed /> {property.bhk}
+//                 </span>
+//                 <span className="bg-gray-100 px-3 py-1 rounded-full flex items-center gap-1 text-sm font-medium">
+//                   <FaBath /> {property.bath}
+//                 </span>
+//                 <span className="bg-gray-100 px-3 py-1 rounded-full flex items-center gap-1 text-sm font-medium">
+//                   <FaRulerCombined /> {property.sqft}
+//                 </span>
+//               </div>
+
+//               {/* Location */}
+//               <div className="flex items-center gap-2 mt-4 text-sm text-gray-500">
+//                 <FaMapMarkerAlt className="text-gray-400" />
+//                 {property.location}
+//               </div>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+
+//       <Footer />
+//     </div>
+//   );
+// }
 "use client";
 
 import Image from "next/image";
@@ -17,6 +161,7 @@ const properties = [
     sqft: "24 sqft",
     location: "1030 Spruce St, Aurora, IL 60506",
     ownerImage: "/Owner1.png",
+    verified: true
   },
   {
     id: 2,
@@ -28,6 +173,7 @@ const properties = [
     sqft: "30 sqft",
     location: "215 Main St, Denver, CO 80205",
     ownerImage: "/Owner2.png",
+    verified: true
   },
   {
     id: 3,
@@ -39,6 +185,7 @@ const properties = [
     sqft: "40 sqft",
     location: "789 Park Ave, Miami, FL 33101",
     ownerImage: "/Owner3.png",
+    verified: true
   },
 ];
 
@@ -110,10 +257,15 @@ export default function Details() {
                 <div>
                   <h2 className="text-[16px] md:text-xl font-bold text-[#0A0909]">
                     {property.price}
+                    
+
                   </h2>
+                  
                   <p className="text-[12px] md:text-base text-[#000104CC]">
                     {property.owner}
                   </p>
+                
+
                 </div>
                 <Image
                   src={property.ownerImage}
@@ -130,15 +282,15 @@ export default function Details() {
                   {property.bhk}
                 </span>
                 <span className=" px-3 py-1 rounded-full flex items-center gap-1 bg-[#0000000D] text-[13px] font-medium">
-                   {property.bath}
+                  {property.bath}
                 </span>
                 <span className=" px-3 py-1 rounded-full flex items-center gap-1 bg-[#0000000D] text-[13px] font-medium">
-                   {property.sqft}
+                  {property.sqft}
                 </span>
               </div>
 
               {/* Location */}
-              <div className="flex items-center gap-2 mt-4 text-sm text-[#0A090999] font-bold" style={{ borderRadius: "13px",border: "1px solid #0000000D" }}>
+              <div className="flex items-center gap-2 mt-4 text-sm text-[#0A090999] font-bold" style={{ borderRadius: "13px", border: "1px solid #0000000D" }}>
                 <img src="/locationcards.png" className="text-gray-400" />
                 {property.location}
               </div>

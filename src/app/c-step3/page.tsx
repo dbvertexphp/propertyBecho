@@ -21,7 +21,7 @@ export default function PropertyTypeSelection() {
     { label: "Others", image: "/yurt.png" },
     { label: "Warehouse", image: "/warehouse.png" },
     { label: "Plot", image: "/plot.png" },
-    { label: "Other", image: "/others.png" },
+    { label: "Other", image: "/Mask group.png" },
   ];
 
   const [selectedOption, setSelectedOption] = useState("Office");
