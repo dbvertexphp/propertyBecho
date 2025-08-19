@@ -242,7 +242,7 @@ export default function PropertyDetail() {
 
           {/* Next Button */}
           <div className="mt-8 mb-7 flex justify-center lg:justify-end">
-            <Link href="/r-step-5">
+            <Link href="#">
               <Image
                 src="/next.png"
                 alt="Next Step"

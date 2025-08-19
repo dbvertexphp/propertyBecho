@@ -351,7 +351,7 @@ export default function BuilderOrInvestor() {
           </div>
           {/* Next Button */}
           <div className="text-right mt-8">
-            <Link href="/c-step2">
+            <Link href="#">
               <Image
                 src="/next.png"
                 alt="Bottom Image"

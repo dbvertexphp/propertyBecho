@@ -161,7 +161,7 @@ export default function PropertyTypeSelection() {
 
           {/* Next Button */}
           <div className="mt-8 flex justify-center lg:justify-end">
-            <Link href="/c-step5" onClick={handleNextClick}>
+            <Link href="#" onClick={handleNextClick}>
               <Image
                 src="/next.png"
                 alt="Next Step"

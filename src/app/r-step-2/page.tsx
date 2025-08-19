@@ -120,7 +120,7 @@ export default function MovingDetail() {
 
           {/* Next Button */}
           <div className="mt-8 flex justify-center lg:justify-end">
-            <Link href="/r-step-3">
+            <Link href="#">
               <Image
                 src="/next.png"
                 alt="Next Step"

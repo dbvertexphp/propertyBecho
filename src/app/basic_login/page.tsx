@@ -289,11 +289,9 @@ export default function Page1() {
               </div>
 
               {/* Google Login */}
-              <Link href="/continue_with_google">
   <button className="w-full flex items-center justify-center border border-gray-300 rounded-2xl py-3 font-semibold hover:bg-gray-50 transition-colors">
     <FcGoogle className="mr-2 text-xl" /> Continue with Google
   </button>
-</Link>
 
               {/* Create Account Link */}
               <p className="text-center mt-6 text-md text-gray-900 font-semibold">
@@ -481,7 +479,7 @@ export default function Page1() {
                 <div className="w-13 md:w-28 h-px bg-gray-500"></div>
               </div>
               {/* Google Login */}
-              <Link href="/continue_with_google">
+              <Link href="#">
   <button className="w-full flex items-center justify-center border border-gray-300 rounded-2xl py-3 font-semibold hover:bg-gray-50 transition-colors">
     <FcGoogle className="mr-2 text-xl" /> Continue with Google
   </button>

@@ -288,12 +288,15 @@ export default function Details() {
     });
   };
 
-  return (
+  return ( 
+    <>
     <div>
       <Header2 />
+    </div>
 
       {/* Banner */}
-      <div className="relative mx-auto md:mt-1 mt-[150px] md:w-[99%] w-[95%] md:h-[95vh] h-[55vh] rounded-3xl overflow-hidden border-4 border-white shadow-2xl">
+      <div className="relative mx-auto md:mt-1 mt-[150px] md:w-[99%] w-[95%] md:h-[95vh] h-[55vh] rounded-3xl overflow-hidden border-4 border-white shadow-2xl"
+      style={{marginTop:130}}>
         <Image
           src={bannerImage}
           alt="Property banner"
@@ -347,7 +350,7 @@ export default function Details() {
                 alt={`Thumbnail ${idx + 1}`}
                 width={250}
                 height={200}
-                className={`w-full h-[100px] md:h-[200px] object-cover ${roundedClass}`}
+                className={`w-full h-[90px] md:h-[200px] object-cover ${roundedClass}`}
               />
               {isLast && (
                 <div
@@ -591,6 +594,13 @@ export default function Details() {
                 </div>
               </div>
               <div className="flex flex-col items-center bg-gray-100 border border-gray-300 rounded-2xl px-4 py-3 w-20">
+                <img src="/details/bathtub-01.svg" alt="Bath" className="w-6 h-6 mb-2" />
+                <div className="flex flex-row items-center mb-1">
+                  <span className="text-[#2450A0] font-extrabold text-lg">4</span>
+                  <span className="text-gray-700 text-base font-semibold">BA</span>
+                </div>
+              </div>
+              <div className="flex flex-col items-center bg-gray-100 border border-gray-300 rounded-2xl px-4 py-3 w-20">
                 <img src="/details/ruler.svg" alt="Area" className="w-6 h-6 mb-2" />
                 <div className="flex flex-row items-center mb-1">
                   <span className="text-[#2450A0] font-extrabold text-lg">24</span>
@@ -722,7 +732,7 @@ export default function Details() {
             <h3 className="text-[31px] md:text-5xl tracking-tight text-left md:ml-[120px]">
               <span className="text-black font-extrabold">Discover</span>{" "}
               <span className="text-[#2b56b6] font-extrabold">
-                Previous Places
+                Similar Places
               </span>
             </h3>
             <p className="mt-4 text-gray-600 text-sm md:text-base max-w-2xl text-left md:ml-[120px]">
@@ -759,7 +769,7 @@ export default function Details() {
                 key={index}
                 className="min-w-full sm:min-w-[50%] lg:min-w-[25%] px-4"
               >
-                <Link href="/Selling">
+                <Link href="#">
                   <div className="bg-white rounded-2xl shadow-md overflow-hidden transition hover:shadow-lg">
                     <Image
                       src={item.image}
@@ -834,8 +844,8 @@ export default function Details() {
           </div>
         </div>
       </section>
-
-      <Footer />
-    </div>
+    <div className="mt-[-70px]"><Footer/></div>
+      
+    </>
   );
 }

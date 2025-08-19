@@ -155,7 +155,7 @@ export default function PropertyTypeSelection() {
           </div>
 
           <div className="mt-8 flex justify-center lg:justify-end">
-            <Link href="/r-step-4">
+            <Link href="#">
               <Image
                 src="/next.png"
                 alt="Next Step"

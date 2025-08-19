@@ -182,7 +182,7 @@ export default function RentOrSell() {
           </div>
 
           <div className="text-right mt-4">
-            <Link href="/c-step2">
+            <Link href="#">
               <Image
                 src="/next.png"
                 alt="Bottom Image"

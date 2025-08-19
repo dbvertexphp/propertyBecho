@@ -209,7 +209,7 @@ export default function Page1() {
 
           {/* Next Button */}
           <div className="mt-8 flex justify-center lg:justify-end">
-            <Link href="/c-step3">
+            <Link href="#">
               <Image
                 src="/next.png"
                 alt="Next Step"
